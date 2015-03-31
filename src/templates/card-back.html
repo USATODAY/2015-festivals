@@ -1,0 +1,34 @@
+
+      <div class="card card-detail">
+      
+        <div class="iapp-detail-image-wrap">
+        </div>
+      
+        <div class="close-card">
+            <img class="iapp-close-card-inner" src="http://www.gannett-cdn.com/experiments/usatoday/2015/02/red-carpet/img/close-icon.svg">
+            
+            </img>
+        </div>
+      
+      
+      
+        <div class="iapp-detail-info">
+            <h2 class="card-back-header"><%= guest %> </h2>
+            <p class="iapp-summary"><%=description%></p>
+            <table class="table">
+                
+            <% _.each(appearances, function(appearance) { %>
+                <tr class="iapp-card-back-detail-appearance">
+                    <td class="iapp-card-back-detail-appearance-date"><%=appearance.date%></td><td class="iapp-card-back-detail-appearance-network"><%=showNames[appearance.network]%></td><td><%=appearance.network%></td><td class="iapp-card-back-detail-description"><%=appearance.description%></td>
+                </tr>
+            
+            <%})%>
+
+            </table>
+        </div>
+      
+      
+      </div>
+      
+        <div class="iapp-detail-bg"></div> 
+
