@@ -7,7 +7,7 @@ define([
     return Backbone.Model.extend({
         defaults: {
             highlight: false,
-            tags: []
+            festivals: []
         },
         initialize: function() {
         },

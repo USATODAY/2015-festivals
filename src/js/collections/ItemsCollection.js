@@ -22,25 +22,27 @@ define([
       // Reference to this collection's model.
       model: ItemModel,
 
-      onFilterUpdate: function(filterArray, networkArray) {
+      onFilterUpdate: function(filterArray) {
            this.filterByTagArray(filterArray);
            var availableTags = this.getAvailableTags();
            Backbone.trigger("items:filtered", availableTags);
       },
 
-      filterByTagArray: function(filterArray) {
-            function arrContains(array1, array2) {
-                var diff = _.difference(array1, array2);
-                if (diff.length === 0) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
+      arrContains: function(array1, array2) {
+          var diff = _.difference(array1, array2);
+          if (diff.length === 0) {
+              return true;
+          } else {
+              return false;
+          }
+      },
 
+
+      filterByTagArray: function(filterArray) {
+           _this = this;
             this.each(function(model) {
-                var modelTags = model.get('tags');
-                var isAvailable = arrContains(filterArray, modelTags);
+                var modelTags = model.get('festivals');
+                var isAvailable = _this.arrContains(filterArray, modelTags);
 
                 if (isAvailable) {
                     model.set({'isAvailable': true});
@@ -51,13 +53,14 @@ define([
 
             //cache a copy of filtered items
             this._availableItems = this.where({'isAvailable': true});
+            console.log(this._availableItems);
 
         },
         getAvailableTags: function() {
             availableTags = [];
 
             _.each(this._availableItems, function(model) {
-                availableTags = _.union(availableTags, model.get('tags'));
+                availableTags = _.union(availableTags, model.get('festivals'));
             });
             return availableTags;
         },

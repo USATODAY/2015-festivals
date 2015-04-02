@@ -59,8 +59,14 @@
   color: $green2;
 }
 
+.card.small-card {
+    background: none;
+}
+
 .small-card {
-  @include BoxShadowHelper(1); 
+  background-color: none;
+  box-shadow: none;
+  // @include BoxShadowHelper(1); 
   cursor: pointer;
   float: left;
   height: auto;

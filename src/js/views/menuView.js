@@ -23,25 +23,21 @@ define([
                 'click .iapp-reset-button': 'onResetClick'
             },
             initialize: function() {
+
                 
                 this.listenTo(this.model, 'change:isMenuOpen', this.updateState);
-                this.listenTo(Backbone, 'window:scroll', this.onWindowScroll);
+                // this.listenTo(Backbone, 'window:scroll', this.onWindowScroll);
                 this.render();
             },
             render: function() {
                 this.updateState();
                 this.$el.html(this.template(this.model.toJSON()));
                 this.addSubViews();
-                if (window.innerWidth >= this.model.get('mobileThreshold')){
-                    this.model.set({'isMenuOpen': true});
-                }
                 this._defaultPanelOffset = this.$('.iapp-menu-panel').offset().top;
                 return this;
             },
             addSubViews: function() {
                 this.tagsCollection = new TagCollection(_.values(dataManager.data.festivals));
-                console.log(_.values(dataManager.data.festivals));
-                console.log(this.tagsCollection);
                 this.tagsView = new TagsView({collection: this.tagsCollection});
                 
             },

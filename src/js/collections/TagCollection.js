@@ -38,6 +38,7 @@ define(
 
         onItemsFiltered: function(availableTags) {
             this.each(function(model) {
+                console.log(availableTags);
 
                 // show all the tags that dont show up in the remaining available tags
                 if (_.contains(availableTags, model.get('tagName'))) {

@@ -17,7 +17,7 @@ define([
 
   return Backbone.View.extend({
     el: ".iapp-card-wrap",
-    
+ 
     events: {
   
     },
@@ -27,8 +27,8 @@ define([
       this.listenTo(router, "highlight", this.onHighlightRoute);
       this.listenTo(router, "homeRoute", this.onHomeRoute);
       this.listenTo(Backbone, "filters:update", this.filter);
-      this.listenTo(Backbone, 'menu:show', this.onMenuShow);
-      this.listenTo(Backbone, 'menu:hide', this.onMenuHide);
+      // this.listenTo(Backbone, 'menu:show', this.onMenuShow);
+      // this.listenTo(Backbone, 'menu:hide', this.onMenuHide);
       this.listenTo(Backbone, 'route:share', this.onRouteShare);
       this.listenTo(Backbone, 'app:reset', this.onAppReset);
       this.render();
@@ -57,7 +57,7 @@ define([
       var _this = this;
       $el.isotope( {
           itemSelector: '.card',
-          transitionDuration: (!config.isMobile) ? '0' : 0,
+          transitionDuration: (!config.isMobile) ? '0.2s' : 0,
           getSortData: {
             appearances: function(itemElem) {
               return parseInt(jQuery(itemElem).data('appearances'));

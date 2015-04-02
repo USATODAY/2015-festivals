@@ -9,7 +9,7 @@ define(
 
     return Backbone.Model.extend( {
         defaults: {
-            isMenuOpen: true,
+            isMenuOpen: false,
             numlikes: 0,
             numdislikes: 0
         },
@@ -24,7 +24,7 @@ define(
             this.listenTo(Backbone, 'window:resize', this.onResize);
             this.listenTo(Backbone, 'liked:update', this.onLikeUpdate);
             this.listenTo(Backbone, 'disliked:update', this.onDislikeUpdate);
-            this.listenTo(Backbone, 'app:reset', this.onAppReset);
+            // this.listenTo(Backbone, 'app:reset', this.onAppReset);
         },
         onChange: function() {
             if (this.get('isMenuOpen')) {

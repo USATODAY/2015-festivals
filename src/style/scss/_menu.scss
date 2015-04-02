@@ -1,14 +1,15 @@
 .iapp-menu-panel {
-  background: rgba(0, 0, 0, 0.8);
+  background: transparentize(white, 0);
   border-radius: 5px;
   @include BoxShadowHelper(2);
-  color: white;
-  float: left;
+  color: $dark-grey;
+  // float: left;
   // margin-left: -2.5%;
+  left: 25%;
   padding: 2em;
-  position: relative;
+  position: fixed;
   transition: transform 400ms ease;
-  width: 25.5%;   
+  width: 50%;   
   z-index: 200;
 }
 
@@ -32,9 +33,9 @@
 }
 
 .iapp-menu-hide {
-    position: absolute;
+    // position: absolute;
   .iapp-menu-panel {
-    transform: translate(-600%, 0);
+    transform: translate(0, 100%);
   }
   .iapp-menu-button {
     transform: translate(50%, 0);
