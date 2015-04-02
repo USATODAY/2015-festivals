@@ -5,7 +5,7 @@ data_tools/src/*.csv
 data_tools/src/*.xlsx
 data_tools/output/*.csv
 data_tools/output/*.json
-
+src/img
 
 
 # Byte-compiled / optimized / DLL files
