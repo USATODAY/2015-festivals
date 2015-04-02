@@ -43,15 +43,15 @@ define([
     template: templates["app-view.html"], 
 
     render: function() {
-      this.$el.html(this.template(dataManager.data.copy));
+      this.$el.html(this.template({chatter: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", header: "Head", contact_email: ""}));
       
     },
 
     addSubViews: function() {
-      this.shareModel = new ShareModel({default_share_language: dataManager.data.copy.default_share_language});
+      this.shareModel = new ShareModel({default_share_language: "share"});
       this.shareView = new ShareView({model: this.shareModel});
       this.menuView = new MenuView({model: new MenuModel()});
-      this.itemsCollection = new ItemsCollection(dataManager.data.people); 
+      this.itemsCollection = new ItemsCollection(dataManager.data.artists); 
       this.cardsView = new CardsView({collection: this.itemsCollection});
       this.lastWeekCollection = new LastWeekCollection(this.itemsCollection.where({'last_week': true}));
       this.lastWeekView = new LastWeekView({collection: this.lastWeekCollection});

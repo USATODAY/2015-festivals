@@ -14,11 +14,6 @@ define(
         },
 
         initialize: function() {
-            if (this.get('tagName') == 'iapp-liked' || this.get('tagName') == 'iapp-disliked') {
-                this.set({
-                    isAvailable: false
-                });
-            }
         }
     });
 

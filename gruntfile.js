@@ -247,6 +247,12 @@ module.exports = function(grunt) {
             src: ['require.js'],
             dest: '<%=config.build%>',
             filter: 'isFile'
+          }, {
+            expand: true,
+            cwd: 'bower_components/bootstrap/dist/css/',
+            src: ['bootstrap.min.css'],
+            dest: '<%=config.build%>',
+            filter: 'isFile'
           }
 
         ]

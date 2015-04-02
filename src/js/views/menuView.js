@@ -25,8 +25,6 @@ define([
             initialize: function() {
                 
                 this.listenTo(this.model, 'change:isMenuOpen', this.updateState);
-                this.listenTo(this.model, 'change:numdislikes', this.onDislikeChange);
-                this.listenTo(this.model, 'change:numlikes', this.onLikeChange);
                 this.listenTo(Backbone, 'window:scroll', this.onWindowScroll);
                 this.render();
             },
@@ -41,7 +39,9 @@ define([
                 return this;
             },
             addSubViews: function() {
-                this.tagsCollection = new TagCollection(dataManager.data.filters);
+                this.tagsCollection = new TagCollection(_.values(dataManager.data.festivals));
+                console.log(_.values(dataManager.data.festivals));
+                console.log(this.tagsCollection);
                 this.tagsView = new TagsView({collection: this.tagsCollection});
                 
             },

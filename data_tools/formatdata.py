@@ -2,272 +2,107 @@ import xlrd
 import json
 import os
 import datetime
+import re
 from slack_tools import slack_notify
 
-source_file = os.path.join(os.path.dirname(__file__), 'src/data.json')
-filters_json = os.path.join(os.path.dirname(__file__), 'src/filters.json')
-copy_json = os.path.join(os.path.dirname(__file__), 'src/copy.json')
-shows_json = os.path.join(os.path.dirname(__file__), 'src/shows.json')
-output_file = os.path.join(os.path.dirname(__file__), 'output/data.json') 
+source_file = os.path.join(os.path.dirname(__file__), 'src/data.xlsx')
+output_json_file = os.path.join(os.path.dirname(__file__), 'output/data.json')
+
+def open_file():
+    wb = xlrd.open_workbook(source_file)
+    return wb
+
+def create_master_list(festivals_list):
+    master_dict = {}
+    master_list = []
+    for festival_list in festivals_list:
+        for artist_dict in festival_list:
+            artist_key_name = clean_band_name(artist_dict["artist"])
+            if artist_key_name in master_dict.keys():
+                master_dict[artist_key_name]["festivals"].append(artist_dict["festivals"][0])
+            else:
+                print "+ %s" % artist_dict["artist"]
+                master_dict[artist_key_name] = artist_dict
+
+    for artist_name, artist_dict in master_dict.iteritems():
+        master_list.append(artist_dict)
+
+    return master_list
+
+def clean_band_name(name_string):
+    no_spaces = re.sub(r"\s+", "_", name_string.strip())
+    no_ampersands = re.sub(r"&+", "and", no_spaces)
+    return no_ampersands.lower()
+
+def clean_festival_name(name_string):
+    no_spaces = re.sub(r"\s+", "_", name_string.strip())
+    return no_spaces.lower()
 
 
-def check_last_week(appearance):
-    date = appearance["DATE"]
-    if date == "":
-        return False
-    date_array = date.split("-")
-    appearance_date_obj = datetime.datetime(int(date_array[0]), int(date_array[1]), int(date_array[2]))
-    current_date = datetime.datetime.today()
-    last_sunday_date = datetime.datetime(current_date.year, current_date.month, current_date.day - (current_date.weekday() + 1))
-    if appearance_date_obj.year == last_sunday_date.year and appearance_date_obj.month == last_sunday_date.month and appearance_date_obj.day == last_sunday_date.day:
-        return True
-    else:
-        return False
+def create_festival_list(sheet):
+    festival_list = []
+    for rownum in range(1, sheet.nrows):
+        if sheet.cell(rownum, 0).ctype is not 1:
+            artist_name = str(int(sheet.cell(rownum, 0).value))
+        else:
+            artist_name = sheet.cell(rownum, 0).value
+        artist_dict = {
+            "artist": artist_name,
+            "genre": sheet.cell(rownum, 1).value,
+            "festivals": [create_festival_tag(sheet.name)]
+        }
+        festival_list.append(artist_dict)
+    return festival_list
 
-# create appearance entry function
-def create_appearance_dict(appearance):
-    dateStr = appearance["DATE"]
-    try:
-        year, month, day = dateStr.split("-")
-    except:
-        print "Error parsing dates for %s. Check formatting." % appearance["Guest"]
-        raise
-
-    new_appearance_dict = {
-        "date": "%s/%s/%s" % (month, day, year),
-        "party": appearance["Party"],
-        "state": appearance["State"],
-        "description": appearance["Description"]
+def create_festival_tag(festival_name):
+    #This name gets truncated by Google. Fixing manually for now
+    if festival_name == "New Orleans Jazz & Heritage Fes":
+        festival_name = "New Orleans Jazz & Heritage Fest"
+    return {
+        "full_name": festival_name,
+        "tag_name": clean_festival_name(festival_name)
     }
 
-    try:
-        is_last_week = check_last_week(appearance)
-    except:
-        slack_notify("FYI some dates may have errors...", "@mitchthorson")
-        is_last_week = False
+def create_festivals_dict(sheet):
+    festivals_dict = {}
+    for rownum in range(1, sheet.nrows):
+        festival_dict = {
+            "name": sheet.cell(rownum, 0).value.encode('utf-8'),
+            "tagName": clean_festival_name(sheet.cell(rownum, 0).value.encode('utf-8')),
+            "date": sheet.cell(rownum, 1).value,
+            "location": sheet.cell(rownum, 2).value
+        }
+        festivals_dict[clean_festival_name(festival_dict["name"])] = festival_dict
 
-    if is_last_week == True:
-        new_appearance_dict['last_week'] = True
-    else:
-        new_appearance_dict['last_week'] = False
-
-    # check for which network the appearance was on
-    if appearance["Fox"].lower().strip() == "x":
-        new_appearance_dict["network"] = "Fox"
-    elif appearance["ABC"].lower().strip() == "x":
-        new_appearance_dict["network"] = "ABC"
-    elif appearance["CBS"].lower().strip() == "x":
-        new_appearance_dict["network"] = "CBS"
-    elif appearance["NBC"].lower().strip() == "x":
-        new_appearance_dict["network"] = "NBC"
-    elif appearance["CNN"].lower().strip() == "x":
-        new_appearance_dict["network"] = "CNN"
-    elif appearance["Univision"].lower().strip() == "x":
-        new_appearance_dict["network"] = "Univision"
-
-    # check for other tags
-    if appearance["House"].lower().strip() == "x":
-        new_appearance_dict["category"] = "house"
-    elif appearance["Senate"].lower().strip() == "x":
-        new_appearance_dict["category"] = "senate"
-    elif appearance["Other Political"].lower().strip() == "x":
-        new_appearance_dict["category"] = "other_political"
-    elif appearance["Admin."].lower().strip() == "x":
-        new_appearance_dict["category"] = "admin"
-    elif appearance["Journalist"].lower().strip() == "x":
-        new_appearance_dict["category"] = "journalist"
-    else:
-        new_appearance_dict["category"] = "other"
-    
-    return new_appearance_dict
-
-def create_tag_list(person_dict):
-    new_tag_list = []
-    if person_dict["party"] is not "":
-        new_tag_list.append(person_dict["party"].lower())
-    if person_dict["gender"] is not "":
-        new_tag_list.append(person_dict["gender"].lower())
-    if person_dict["race"] is not "":
-        new_tag_list.append(person_dict["race"].lower())
-        new_tag_list.append("other")
-    for appearance in person_dict["appearances"]:
-        if "category" in appearance.keys():
-            new_tag_list.append(appearance["category"].lower())
-    for appearance in person_dict["appearances"]:
-        if "network" in appearance.keys():
-            new_tag_list.append(appearance["network"].lower())
-
-    return new_tag_list
-
-def check_categories(appearance, person_dict):
-    # check for boolean values on appearance
-    if appearance["House"].lower() == "x":
-        person_dict["category"] = "house"
-    if appearance["Senate"].lower() == "x":
-        person_dict["category"] = "senate"
-    if appearance["Admin."].lower() == "x":
-        person_dict["category"] = "admin"
-    if appearance["Other Political"].lower() == "x":
-        person_dict["category"] = "other_political"
-    if appearance["Journalist"].lower() == "x":
-        person_dict["category"] = "journalist"
-    if appearance["Other"].lower() == "x":
-        person_dict["category"] = "other"
-
+    return festivals_dict
 
 
 def format_data():
-    # Open the workbook
-    # wb = xlrd.open_workbook(source_file)
+    print "opening source file"
+    wb = open_file()
+
+    #a list in which to store each festival
+    festivals_list = []
+
+    # loop through the sheets and app the results to the list
+    print "looping through source festivals"
+    for sheet_num in range(1, wb.nsheets):
+        sh = wb.sheet_by_index(sheet_num)
+        festival_list = create_festival_list(sh)
+        festivals_list.append(festival_list)
+
+    # create master artist list
+    artist_list = sorted(create_master_list(festivals_list), key=lambda k: len(k["festivals"]))
+
+    #create master festivals dict
+    festivals_dict = create_festivals_dict(wb.sheet_by_index(0))
     
-    # Get the first sheet either by index or by name
-    # sh = wb.sheet_by_index(0)
-    
-    json_file = open(source_file)
-    # List to store a record of each appearance
-    appearance_list = json.load(json_file)
-    json_file.close()
+    print "Saving data to JSON"
 
-    filter_file = open(filters_json)
-    filter_list = json.load(filter_file)
-    filter_file.close()
-   
-    # flatten filter list
-    flat_filter_list = []
-    for filter_item in filter_list:
-        if not filter_item["filters"] == "":
-            flat_filter_list.append(filter_item["filters"])
+    with open (output_json_file, 'w') as output_file:
+        json.dump({'artists': artist_list, 'festivals': festivals_dict}, output_file)
 
-    copy_file = open(copy_json)
-    copy_list = json.load(copy_file)
-    copy_file.close()
-
-    shows_file = open(shows_json)
-    shows_list = json.load(shows_file)
-    shows_file.close()
-    shows_dict = {}
-
-    for show in shows_list:
-        shows_dict[show["network"]] = show["show_name"]
-    
-    # Add all appearances as dictionaries to the list
-    #for rownum in range(1, sh.nrows):
-    #  appearance = {}
-    #  headers = sh.row_values(0)
-    #  for colnum in range(sh.ncols):
-    #    appearance[headers[colnum]] = sh.cell_value(rownum, colnum)
-    #  appearance_list.append(appearance)
-
-    # master list to hold people objects. Desired format is
-    # {
-    #     guest: string,
-    #     party: string,
-    #     state: string,
-    #     race: string,
-    #     gender: string,
-    #     house: boolean,
-    #     senate: boolean,
-    #     admin: boolean,
-    #     other_political: boolean,
-    #     journalist: boolean,
-    #     other: boolean,
-    #     description: string,
-    #     appearances: list of appearances in the format
-    #         {
-    #             date: 'string',
-    #             network: 'string'
-    #         },
-    # }
-
-    # use dictionary with named keys to check if person exists yet
-    people_dict = {}
-
-
-    for appearance in appearance_list:
-        guest_name = appearance['Guest'].strip()
-        if not guest_name == "":
-            # check if person is already in our dict
-            if not guest_name in people_dict.keys():
-                #create person dict based on info
-                new_person_dict = {
-                    "guest": guest_name, 
-                    "party": appearance["Party"],
-                    "state": appearance["State"],
-                    "race": appearance["Race"],
-                    "gender": appearance["Gender"],
-                    "description": appearance["Description"],
-                    "last_week": False,
-                    "last_week_appearances": [],
-                    "total_appearances": 0,
-                    "category": None
-                }
-
-                # fix gender to full words
-                if new_person_dict["gender"].lower().strip() == "f":
-                    new_person_dict["gender"] = "female"
-                elif new_person_dict["gender"].lower().strip() == "m":
-                    new_person_dict["gender"] = "male"
-
-                check_categories(appearance, new_person_dict)
-
-                new_person_dict["appearances"] = []
-
-                new_appearance_dict = create_appearance_dict(appearance)
-
-                # Increment total appearance number
-                new_person_dict["total_appearances"] = new_person_dict["total_appearances"] + 1
-
-                if new_appearance_dict["last_week"] == True:
-                    new_person_dict["last_week"] = True
-                    new_person_dict["last_week_appearances"].append(new_appearance_dict["network"])
-
-                new_person_dict["appearances"].append(new_appearance_dict)
-
-                #add them to the dict
-                people_dict[guest_name] = new_person_dict
-            
-            # if person is already in the dictionary
-            else:
-                #create a new appearance dictionary
-                new_appearance_dict = create_appearance_dict(appearance)
-                
-                # Increment total appearance number
-                people_dict[guest_name]["total_appearances"] = people_dict[guest_name]["total_appearances"] + 1
-
-                # Check categories o appearance and apply to person
-                check_categories(appearance, people_dict[guest_name])
-
-                # Update the person's description
-                people_dict[guest_name]["description"] = appearance["Description"]
-
-                if new_appearance_dict["last_week"] == True:
-                    people_dict[guest_name]["last_week"] = True
-                    people_dict[guest_name]["last_week_appearances"].append(new_appearance_dict["network"])
-
-                #append it to the existing person appearance list
-                people_dict[guest_name]["appearances"].append(new_appearance_dict)
-            
-            people_dict[guest_name]["tags"] = list(set(create_tag_list(people_dict[guest_name])))
-        else:
-            pass
-
-    # now iterate over people dictionary and flatten into a list of people
-
-    person_list = []
-
-    for key, value in people_dict.iteritems():
-        person_list.append(value)
-
-    data_dict = {
-        "people": person_list,
-        "filters": flat_filter_list,
-        "copy": copy_list[0],
-        "shows": shows_dict
-    }
-    # save person list to json file
-
-    with open(output_file, "w") as output:
-        json.dump(data_dict, output)
+    print "success"
 
 
 if __name__ == "__main__":

@@ -13,17 +13,26 @@
       
       
         <div class="iapp-detail-info">
-            <h2 class="card-back-header"><%= guest %> </h2>
-            <p class="iapp-summary"><%=description%></p>
+            <h2 class="card-back-header"><%= artist %> </h2>
+            <p class="iapp-summary"></p>
             <table class="table">
-                
-            <% _.each(appearances, function(appearance) { %>
+                <thead>
+                    
+                    <tr>
+                        <th>Festival</th>
+                    </tr>
+
+                </thead>
+                <tbody>
+                    
+            <% _.each(festivals, function(festival) { %>
                 <tr class="iapp-card-back-detail-appearance">
-                    <td class="iapp-card-back-detail-appearance-date"><%=appearance.date%></td><td class="iapp-card-back-detail-appearance-network"><%=showNames[appearance.network]%></td><td><%=appearance.network%></td><td class="iapp-card-back-detail-description"><%=appearance.description%></td>
+                    <td class="iapp-card-back-detail-appearance-date"><%=festival.full_name%></td><td class="iapp-card-back-detail-appearance-network"></td><td></td><td class="iapp-card-back-detail-description"></td>
                 </tr>
             
             <%})%>
 
+                </tbody>
             </table>
         </div>
       

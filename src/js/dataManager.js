@@ -19,10 +19,6 @@ define(
 
     }
 
-    //will check against networks and categories later 
-    //we have to track them seperately
-    var networkFilters = ['abc', 'cnn', 'nbc', 'fox', 'cbs'];
-    var categoryFilters = ['house', 'senate', 'admin', 'other_political', 'journalist', 'other'];
 
     return {
         data: {},
@@ -30,17 +26,9 @@ define(
             var _this = this;
             jQuery.getJSON(dataURL, function(data) {        
                 _this.data = data;
-                
-                
-
-                
-                _.each(_this.data.people, function(dataObj) {
-                    
-
-                });
 
                 console.log(_this.data);
-                _this.organizeTags();
+                // _this.organizeTags();
                 Backbone.trigger("data:ready", this);
 
             });
@@ -72,7 +60,7 @@ define(
             return tagName.replace(/\n+/g, "-").toLowerCase();
         },
         userName: '',
-        base_url: 'http://www.gannett-cdn.com/experiments/usatoday/2015/03/sunday-shows/img/'
+        base_url: 'http://www.gannett-cdn.com/experiments/usatoday/2015/04/music-festivals/img/'
     };
 
 

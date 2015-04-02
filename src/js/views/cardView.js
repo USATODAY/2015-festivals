@@ -16,10 +16,10 @@ define([
       },
 
       className: function() {
-        var tags = this.model.get("tags");
+        var tags = this.model.get("festivals");
         var classes = "card small-card";
         _.each(tags, function(tag) {
-          var tagClass = tag;
+          var tagClass = tag.tag_name;
           
           classes += (" " + tagClass);
         });

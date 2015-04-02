@@ -7,27 +7,19 @@ define([
     return Backbone.Model.extend({
         defaults: {
             highlight: false,
-            tags: [],
-            showNames: {}
+            tags: []
         },
         initialize: function() {
-            this.set({'filteredAppearancesTotal': this.get('total_appearances')});
-            this.set({'filteredAppearances': this.get('appearances')});
-            this.set({'showNames': dataManager.data.shows});
-            this.listenTo(Backbone, 'filters:update', this.onFiltersUpdate);
         },
-        onFiltersUpdate: function(filterArray, networkArray, categoryArray) {
+        onFiltersUpdate: function(filterArray) {
             var _this = this;
             // _.defer(function() {
                 // _this.filterAppearancesByNetwork(networkArray, categoryArray);
             // });
-            this.filterAppearancesByNetwork(networkArray, categoryArray);
         },
 
-        filterAppearancesByNetwork: function(networkArray, categoryArray) {
+        filterAppearancesByNetwork: function(networkArray) {
             var totalAppearances = this.get('appearances');
-            console.log(networkArray);
-            console.log(categoryArray);
             var filteredAppearances = totalAppearances;
             if (networkArray.length > 0) {
                 filteredAppearances = _.filter(filteredAppearances, function(appearance) {

@@ -14,7 +14,7 @@ __p += '<div class="iapp-project-info-wrap">\n    <h1 class="iapp-page-header">'
 ((__t = (contact_email)) == null ? '' : __t) +
 '\'>' +
 ((__t = (contact_email)) == null ? '' : __t) +
-'</a></p>\n\n    <div class="iapp-share-wrap"></div>\n     <div class="switch">\n        <label>\n            <input type="radio" class=\'iapp-last-week-radio\' name=\'last-week\' checked>\n            <div class="iapp-toggle-name">\n                All guests\n            </div>\n        </label>\n        <label>\n            <input type="radio" class=\'iapp-last-week-radio\' name=\'last-week\'>\n            <div class="iapp-toggle-name">\n                Last week\n            </div>\n        </label>\n      </div>\n</div>\n<div class="iapp-menu"></div>\n<div id="card-wrap" class="iapp-card-wrap"></div>\n\n<div class="iapp-intro-wrap">\n    <div class="iapp-intro-content-wrap">\n        <div class="iapp-intro-icon-wrap">\n            <!-- <div class="iapp&#45;intro&#45;icon"><img src="img/tv&#45;icon&#45;white.svg" alt=""></div> -->\n            <div class="iapp-intro-icon"><img src="http://www.gannett-cdn.com/experiments/usatoday/2015/03/sunday-shows/img/tv-icon-blue.svg" alt=""></div>\n        </div> <!-- end iapp-intro-icon-wrap -->\n        <div class="iapp-intro-info">\n            <h2 class="iapp-intro-header">' +
+'</a></p>\n\n    <div class="iapp-share-wrap"></div>\n    </div>\n<div class="iapp-menu"></div>\n<div id="card-wrap" class="iapp-card-wrap"></div>\n\n<div class="iapp-intro-wrap">\n    <div class="iapp-intro-content-wrap">\n        <div class="iapp-intro-icon-wrap">\n            <!-- <div class="iapp&#45;intro&#45;icon"><img src="img/tv&#45;icon&#45;white.svg" alt=""></div> -->\n            <div class="iapp-intro-icon"><img src="http://www.gannett-cdn.com/experiments/usatoday/2015/03/sunday-shows/img/tv-icon-blue.svg" alt=""></div>\n        </div> <!-- end iapp-intro-icon-wrap -->\n        <div class="iapp-intro-info">\n            <h2 class="iapp-intro-header">' +
 ((__t = ( header )) == null ? '' : __t) +
 '</h2>\n            <p class="iapp-intro-chatter">' +
 ((__t = ( chatter )) == null ? '' : __t) +
@@ -30,22 +30,14 @@ var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
 with (obj) {
 __p += '\n      <div class="card card-detail">\n      \n        <div class="iapp-detail-image-wrap">\n        </div>\n      \n        <div class="close-card">\n            <img class="iapp-close-card-inner" src="http://www.gannett-cdn.com/experiments/usatoday/2015/02/red-carpet/img/close-icon.svg">\n            \n            </img>\n        </div>\n      \n      \n      \n        <div class="iapp-detail-info">\n            <h2 class="card-back-header">' +
-((__t = ( guest )) == null ? '' : __t) +
-' </h2>\n            <p class="iapp-summary">' +
-((__t = (description)) == null ? '' : __t) +
-'</p>\n            <table class="table">\n                \n            ';
- _.each(appearances, function(appearance) { ;
+((__t = ( artist )) == null ? '' : __t) +
+' </h2>\n            <p class="iapp-summary"></p>\n            <table class="table">\n                <thead>\n                    \n                    <tr>\n                        <th>Festival</th>\n                    </tr>\n\n                </thead>\n                <tbody>\n                    \n            ';
+ _.each(festivals, function(festival) { ;
 __p += '\n                <tr class="iapp-card-back-detail-appearance">\n                    <td class="iapp-card-back-detail-appearance-date">' +
-((__t = (appearance.date)) == null ? '' : __t) +
-'</td><td class="iapp-card-back-detail-appearance-network">' +
-((__t = (showNames[appearance.network])) == null ? '' : __t) +
-'</td><td>' +
-((__t = (appearance.network)) == null ? '' : __t) +
-'</td><td class="iapp-card-back-detail-description">' +
-((__t = (appearance.description)) == null ? '' : __t) +
-'</td>\n                </tr>\n            \n            ';
+((__t = (festival.full_name)) == null ? '' : __t) +
+'</td><td class="iapp-card-back-detail-appearance-network"></td><td></td><td class="iapp-card-back-detail-description"></td>\n                </tr>\n            \n            ';
 });
-__p += '\n\n            </table>\n        </div>\n      \n      \n      </div>\n      \n        <div class="iapp-detail-bg"></div> \n\n';
+__p += '\n\n                </tbody>\n            </table>\n        </div>\n      \n      \n      </div>\n      \n        <div class="iapp-detail-bg"></div> \n\n';
 
 }
 return __p
@@ -53,22 +45,11 @@ return __p
 
 this["templates"]["card-front.html"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
-function print() { __p += __j.call(arguments, '') }
+var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class="iapp-card-info">\n    <h2 class="iapp-card-info-header">' +
-((__t = ( guest)) == null ? '' : __t) +
-'</h2>\n    <p class="iapp-card-info-text">' +
-((__t = (description)) == null ? '' : __t) +
-'</p>\n    \n</div>\n<div class="iapp-card-front-image-wrap">\n    <div class="iapp-card-front-number">\n       <div class="iapp-card-front-number-inner ">\n           ' +
-((__t = (filteredAppearancesTotal)) == null ? '' : __t) +
-'\n       </div>\n       <img src="http://www.gannett-cdn.com/experiments/usatoday/2015/03/sunday-shows/img/tv-icon-empty.svg" alt="" />\n   </div>\n</div>\n';
- if (filteredAppearancesTotal !== 1) {;
-__p += '\n<p>appearances</p>\n';
- } else {;
-__p += '\n<p>appearance</p>\n';
- } ;
-__p += '\n';
+__p += '<div class="iapp-card-info">\n    <div class="iapp-card-image-wrap">\n    </div>\n    <h2 class="iapp-card-info-header">' +
+((__t = ( artist)) == null ? '' : __t) +
+'</h2>\n    <p class="iapp-card-info-text"></p>\n    \n</div>\n';
 
 }
 return __p

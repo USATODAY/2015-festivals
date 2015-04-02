@@ -21,7 +21,7 @@ define(
             if (this.model.get('isAvailable') === false) {
                 this.$el.addClass('unavailable');
             }
-            this.$el.html(this.model.get('tagPretty'));    
+            this.$el.html(this.model.get('name'));    
             return this;
         },
         onClick: function() {

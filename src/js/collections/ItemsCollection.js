@@ -15,7 +15,7 @@ define([
 
       initialize: function() {
 
-        this.listenTo(Backbone, "filters:update", this.onFilterUpdate);
+        // this.listenTo(Backbone, "filters:update", this.onFilterUpdate);
         this.listenTo(Backbone, 'app:reset', this.onResetApp);
       },
 

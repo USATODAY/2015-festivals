@@ -19,21 +19,9 @@ define(
         },
 
         onActiveChange: function() {
-            var networkArray = [];
-            var categoryArray = [];
             var filterArray = [];
             var activeModels = this.where({'isActive': true});
             _.each(activeModels, function(model) {
-                //track array of network tags
-                if (model.get('isNetwork')) {
-                    networkArray.push(model.get('tagName'));
-                }
-
-                //track array of category tags
-                if (model.get('isCategory')) {
-                    categoryArray.push(model.get('tagName'));
-                }
-
                 filterArray.push(model.get('tagName'));
             });
 
@@ -45,7 +33,7 @@ define(
             }
 
 
-            Backbone.trigger('filters:update', filterArray, networkArray, categoryArray);
+            Backbone.trigger('filters:update', filterArray);
         },
 
         onItemsFiltered: function(availableTags) {
