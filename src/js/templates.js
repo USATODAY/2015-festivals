@@ -47,7 +47,7 @@ this["templates"]["card-front.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class="iapp-card-info">\n    <div class="iapp-card-image-wrap">\n        <img src="img/' +
+__p += '<div class="iapp-card-info">\n    <div class="iapp-card-image-wrap">\n        <img src="http://www.gannett-cdn.com/experiments/usatoday/2015/04/festivals/img/' +
 ((__t = (genre)) == null ? '' : __t) +
 '.gif" alt="" />\n    </div>\n    <h2 class="iapp-card-info-header">' +
 ((__t = ( artist)) == null ? '' : __t) +

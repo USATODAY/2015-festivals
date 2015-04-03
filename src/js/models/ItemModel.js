@@ -10,6 +10,7 @@ define([
             festivals: []
         },
         initialize: function() {
+            this.set({'genre': this.get('genre').toLowerCase()});
         },
         onFiltersUpdate: function(filterArray) {
             var _this = this;
