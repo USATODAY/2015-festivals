@@ -31,7 +31,9 @@ function print() { __p += __j.call(arguments, '') }
 with (obj) {
 __p += '\n      <div class="card card-detail">\n      \n        <div class="iapp-detail-image-wrap">\n        </div>\n      \n        <div class="close-card">\n            <img class="iapp-close-card-inner" src="http://www.gannett-cdn.com/experiments/usatoday/2015/02/red-carpet/img/close-icon.svg">\n            \n            </img>\n        </div>\n      \n      \n      \n        <div class="iapp-detail-info">\n            <h2 class="card-back-header">' +
 ((__t = ( artist )) == null ? '' : __t) +
-' </h2>\n            <p class="iapp-summary"></p>\n            <table class="table">\n                <thead>\n                    \n                    <tr>\n                        <th>Festival</th>\n                    </tr>\n\n                </thead>\n                <tbody>\n                    \n            ';
+' </h2>\n            <p class="iapp-summary">' +
+((__t = ( genre )) == null ? '' : __t) +
+'</p>\n            <table class="table">\n                <thead>\n                    \n                    <tr>\n                        <th>Festival</th>\n                    </tr>\n\n                </thead>\n                <tbody>\n                    \n            ';
  _.each(festivals, function(festival) { ;
 __p += '\n                <tr class="iapp-card-back-detail-appearance">\n                    <td class="iapp-card-back-detail-appearance-date">' +
 ((__t = (festival.full_name)) == null ? '' : __t) +

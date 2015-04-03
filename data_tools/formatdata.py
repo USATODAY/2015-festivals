@@ -50,7 +50,7 @@ def create_festival_list(sheet):
             artist_name = sheet.cell(rownum, 0).value
         artist_dict = {
             "artist": artist_name,
-            "genre": sheet.cell(rownum, 1).value,
+            "genre": sheet.cell(rownum, 1).value.lower(),
             "festivals": [create_festival_tag(sheet.name)]
         }
         festival_list.append(artist_dict)

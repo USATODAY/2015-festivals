@@ -14,6 +14,13 @@ define(
         },
 
         initialize: function() {
+            this.on("change:isActive", this.onChange);
+        },
+
+        onChange: function() {
+            if (this.get('isActive')) {
+                Backbone.trigger('set:filter', this);
+            }
         }
     });
 

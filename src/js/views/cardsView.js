@@ -27,8 +27,7 @@ define([
       this.listenTo(router, "highlight", this.onHighlightRoute);
       this.listenTo(router, "homeRoute", this.onHomeRoute);
       this.listenTo(Backbone, "filters:update", this.filter);
-      // this.listenTo(Backbone, 'menu:show', this.onMenuShow);
-      // this.listenTo(Backbone, 'menu:hide', this.onMenuHide);
+      this.listenTo(Backbone, "clear:filter", this.clearFilters);
       this.listenTo(Backbone, 'route:share', this.onRouteShare);
       this.listenTo(Backbone, 'app:reset', this.onAppReset);
       this.render();
@@ -86,11 +85,9 @@ define([
     }, 
 
 
-    filter: function(filterArray) {
-        filterArray = _.map(filterArray, function(filter) {
-          return '.' + filter;
-        });
-        var filterStr = filterArray.join(', ');
+    filter: function(activeFilter) {
+        filterStr = "." + activeFilter.get('tagName');
+        console.log(filterStr);
         this.$el.isotope({ filter: filterStr });
         _.delay(function() {
           $(window).trigger('scroll');
@@ -109,20 +106,7 @@ define([
     }, 500),
 
     clearFilters: function(e) {
-      this.currentFilter = [];
-      this.$el.find(".iapp-filter-button-clear").removeClass("show");
-      this.$el.find(".iapp-filters-wrap").find(".iapp-filter-button").removeClass("iapp-selected");
-      this.$el.isotope({ filter: "" });
-    },
-
-    onMenuShow: function() {
-      this.$el.removeClass('iapp-card-wrap-full-width');
-      this.relayout();
-    },
-
-    onMenuHide: function() {
-      this.$el.addClass('iapp-card-wrap-full-width');
-      this.relayout();
+      this.$el.isotope({ filter: "*"});
     },
 
     onRouteShare: function() {

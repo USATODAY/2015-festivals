@@ -14,7 +14,6 @@ define(
            this.listenTo(Backbone, 'video:set', this.advanceSub);
            this.listenTo(Backbone, 'tags:reset', this.onTagsReset);
            this.listenTo(Backbone, 'app:reset', this.onReset);
-           this.listenTo(this.collection, 'change:isActive', this.onFilter);
            
            this.render();
         },
@@ -24,7 +23,7 @@ define(
         el: '.iapp-filters-wrap',
         
         
-        render: function(data) {
+        render: function() {
 
             
 
@@ -36,59 +35,28 @@ define(
                  _this.$el.append(tagView.render().el);
             });
 
-            _.defer(function() {
-                    
-                    _this.$el.isotope({
-                        itemSelector: '.iapp-filter-button',
-                        transitionDuration:  0,
-                        layoutMode: 'fitRows'
+            // _.defer(function() {
+            //         
+            //         _this.$el.isotope({
+            //             itemSelector: '.iapp-filter-button',
+            //             transitionDuration:  0,
+            //             layoutMode: 'fitRows'
+            //
+            //     });
+            // });
 
-                });
-            });
-
-            this.$el.append('<div class="iapp-filter-button iapp-filter-button-clear">Clear Filters</div>');
-            this.filter();
+            this.$el.append('<div class="iapp-filter-button iapp-filter-button-clear">Show All</div>');
             
             return this;
         },
         
-        filter: function() {
-
-
-            this.$el.isotope({filter: ':not(.unavailable)'}); 
-            
-        },
-        
-        throttledFilter: _.throttle(function() {
-                this.filter();
-            }, 100, {leading: false}
-        ),
-        
-       
-        onTagsReset: function() {
-            this.$el.isotope('layout');
-        },
-
-        onReset: function() {
-            var _this = this;
-            _.delay(function() {
-                _this.$el.isotope('layout');
-            }, 500);
-        },
-
-        onFilter: function() {
-            if (this.collection.filter(function(tag) {
-                return tag.get('isActive');
-            }).length > 0) {
-                this.$('.iapp-filter-button-clear').addClass('show');
-            } else {
-                this.$('.iapp-filter-button-clear').removeClass('show');
-            }
-        },
         onClear: function() {
-            this.collection.each(function(tagModel) {
-                tagModel.set({'isActive': false}); 
+
+            _.each(this.collection.where({'isActive': true}), function(tagModel) {
+                tagModel.set({'isActive': false});
             });
+
+            Backbone.trigger("clear:filter");
 
 
             
