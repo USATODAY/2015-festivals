@@ -77,7 +77,7 @@ define([
 
       var _this = this;
 
-      this.$('.cover-img').unveil(500, function() {
+      this.$('.cover-img').unveil(5000, function() {
         $(this).imagesLoaded(function() {
           _this.relayout();
         });

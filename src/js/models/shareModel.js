@@ -9,7 +9,7 @@ define(
 
     return Backbone.Model.extend( {
         defaults: {
-            'default_share_language': '',
+            'default_share_language': 'I am ready to rock with USA TODAY’s Summer Music Festivalaganza interactive.',
             'stillimage': 'http://www.gannett-cdn.com/experiments/usatoday/2015/03/sunday-shows/img/fb-post.jpg'            
         },
 
@@ -22,7 +22,8 @@ define(
                 'encodedShare': encodeURIComponent(this.get('default_share_language')),
                 'fb_id': config.facebook.app_id,
                 'fb_redirect': 'http://' + window.location.hostname + '/pages/interactives/fb-share/',
-                'email_link': this.createEmailLink(baseURL)
+                'email_link': this.createEmailLink(baseURL),
+                'sharelanguate': this.get('default_share_language')
                 
             }); 
             console.log(this);

@@ -15,7 +15,7 @@ define(
     } else {
 
 
-        dataURL = "http://" + hostname + "/services/webproxy/?url=http://www.gannett-cdn.com/experiments/usatoday/2015/03/sunday-shows/data/data.json";
+        dataURL = "http://" + hostname + "/services/webproxy/?url=http://www.gannett-cdn.com/experiments/usatoday/2015/04/festivals/data/data.json";
 
     }
 
@@ -60,7 +60,7 @@ define(
             return tagName.replace(/\n+/g, "-").toLowerCase();
         },
         userName: '',
-        base_url: 'http://www.gannett-cdn.com/experiments/usatoday/2015/04/music-festivals/img/'
+        base_url: 'http://www.gannett-cdn.com/experiments/usatoday/2015/04/festivals/img/'
     };
 
 
