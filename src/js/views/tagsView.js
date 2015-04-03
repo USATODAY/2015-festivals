@@ -87,8 +87,12 @@ define(
         },
         onClear: function() {
             this.collection.each(function(tagModel) {
-                tagModel.set({'isActive': false});
+                tagModel.set({'isActive': false}); 
             });
+
+
+            
+            
         }
 
         

@@ -1,7 +1,8 @@
 .iapp-menu-panel {
   background: transparentize(white, 0);
-  border-radius: 5px;
-  @include BoxShadowHelper(2);
+  border-radius: 15px;
+  bottom: 110px;
+  @include BoxShadowHelper(3);
   color: $dark-grey;
   // float: left;
   // margin-left: -2.5%;
@@ -35,7 +36,7 @@
 .iapp-menu-hide {
     // position: absolute;
   .iapp-menu-panel {
-    transform: translate(0, 100%);
+    transform: translate(0, 200%);
   }
   .iapp-menu-button {
     transform: translate(50%, 0);
@@ -77,7 +78,7 @@
   font-family: "Futura Today DemiBold", Arial, sans-serif;
   font-size: 2em;
   margin-bottom: 1em;
-  text-align: left;
+  text-align: center;
   text-transform: uppercase;
 }
 
@@ -232,4 +233,16 @@
   transition: transform 500ms ease;
   width: 80px;
   z-index: 100;
+}
+
+.iapp-triangle-down {
+    width: 0; 
+	height: 0; 
+	border-left: 20px solid transparent;
+	border-right: 20px solid transparent;
+	border-top: 20px solid white;
+    position: absolute;
+    transform: translate(-50%, 0);
+    left: 50%;
+    bottom: -20px;
 }

@@ -24,8 +24,8 @@ define([
 
       onFilterUpdate: function(filterArray) {
            this.filterByTagArray(filterArray);
-           var availableTags = this.getAvailableTags();
-           Backbone.trigger("items:filtered", availableTags);
+           // var availableTags = this.getAvailableTags();
+           Backbone.trigger("items:filtered", this._availableTags);
       },
 
       arrContains: function(array1, array2) {
@@ -40,20 +40,28 @@ define([
 
       filterByTagArray: function(filterArray) {
            _this = this;
+           availableTags = [];
             this.each(function(model) {
-                var modelTags = model.get('festivals');
+                var modelTags = _.map(model.get('festivals'), function(festival_obj) {
+                    return festival_obj.tag_name;
+                });
                 var isAvailable = _this.arrContains(filterArray, modelTags);
 
                 if (isAvailable) {
+                    availableTags = availableTags.concat(modelTags);
                     model.set({'isAvailable': true});
                 } else {
                     model.set({'isAvailable': false});
                 }
             });
 
+
             //cache a copy of filtered items
             this._availableItems = this.where({'isAvailable': true});
-            console.log(this._availableItems);
+
+            //cache copy of available tags
+            this._availableTags = _.uniq(availableTags);
+            // console.log(this._availableItems);
 
         },
         getAvailableTags: function() {

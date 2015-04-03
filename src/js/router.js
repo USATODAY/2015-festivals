@@ -9,8 +9,7 @@
       routes: {
         "": "home",
         "_": "home",
-        'last-week/': 'lastWeek',
-        'filters/:filterStr': 'filters'
+        'festival/:filterStr': 'filters'
         
       },
 

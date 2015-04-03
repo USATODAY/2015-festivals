@@ -78,16 +78,20 @@
   position: relative;
   text-align: center;
   transition: none;
-  width: calc(25% - 10px);
+  width: 80px;
   z-index: 5;
+
+  img {
+    max-width: 100%;
+  }
 
 
   @media (min-width: 1400px) {
-    width: calc(20% - 10px);
+    // width: calc(20% - 10px);
   }
 
   @media (max-width: 900px) {
-    width: calc(33% - 10px);
+    // width: calc(33% - 10px);
   }
 
   @media (max-width: 700px) {
@@ -253,7 +257,7 @@
 
 .iapp-card-info-header {
   font-family: "Futura Today Demibold", Arial,sans-serif;
-  font-size: 1.2em;
+  font-size: 1em;
   margin: 0;
 }
 

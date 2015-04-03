@@ -47,7 +47,9 @@ this["templates"]["card-front.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class="iapp-card-info">\n    <div class="iapp-card-image-wrap">\n    </div>\n    <h2 class="iapp-card-info-header">' +
+__p += '<div class="iapp-card-info">\n    <div class="iapp-card-image-wrap">\n        <img src="img/' +
+((__t = (genre)) == null ? '' : __t) +
+'.gif" alt="" />\n    </div>\n    <h2 class="iapp-card-info-header">' +
 ((__t = ( artist)) == null ? '' : __t) +
 '</h2>\n    <p class="iapp-card-info-text"></p>\n    \n</div>\n';
 
@@ -84,11 +86,7 @@ this["templates"]["menu.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class="iapp-menu-panel">\n    \n    \n    <h3 class="iapp-menu-header iapp-menu-header-filters">Filters</h3>\n    <div class="iapp-filters-wrap"></div> \n</div>\n\n<div class="iapp-menu-control-area">\n    <div class="iapp-menu-button iapp-button iapp-button-blue iapp-clickable"><div class="iapp-button-text">Filters</div></div>\n    <!-- <div class="iapp&#45;top&#45;button iapp&#45;button iapp&#45;button&#45;blue iapp&#45;clickable"><div class="iapp&#45;button&#45;text">Top</div></div> -->\n    <div class="iapp-menu-close iapp-button iapp-clickable"><div class="iapp-button-text">Close Menu</div></div>\n    <div class="iapp-reset-button iapp-button iapp-clickable"><div class="iapp-button-text">Reset</div></div>\n    <div class="iapp-menu-scoreboard">\n\n        <div class="iapp-menu-scoreboard-likes">\n            <span class="iapp-menu-scoreboard-icon"><img src="http://www.gannett-cdn.com/experiments/usatoday/2015/02/red-carpet/img/like.svg" alt="like"></span>\n            <div class="iapp-menu-scoreboard-scrore-wrap">\n                <span class="iapp-menu-scoreboard-score iapp-menu-scoreboard-score-number">' +
-((__t = (numlikes)) == null ? '' : __t) +
-'</span><span class="iapp-menu-scoreboard-score iapp-menu-scoreboard-score-total">/10</span>\n            </div>\n        </div>\n        <div class="iapp-menu-scoreboard-dislikes">\n            \n            <span class="iapp-menu-scoreboard-icon"><img src="http://www.gannett-cdn.com/experiments/usatoday/2015/02/red-carpet/img/dislike.svg" alt="like"></span> \n            <div class="iapp-menu-scoreboard-scrore-wrap">\n                <span class="iapp-menu-scoreboard-score iapp-menu-scoreboard-score-total">/10</span>\n                <span class="iapp-menu-scoreboard-score iapp-menu-scoreboard-score-number">' +
-((__t = (numdislikes)) == null ? '' : __t) +
-'</span> \n            </div>\n        </div>\n    </div>\n</div>\n';
+__p += '<div class="iapp-menu-panel">\n    \n    \n    <h3 class="iapp-menu-header iapp-menu-header-filters">Festivals</h3>\n    <div class="iapp-filters-wrap"></div> \n    <div class="iapp-triangle-down"></div>\n</div>\n\n<div class="iapp-menu-control-area">\n    <div class="iapp-menu-button iapp-button iapp-button-blue iapp-clickable"><div class="iapp-button-text">Festivals</div></div>\n    <!-- <div class="iapp&#45;top&#45;button iapp&#45;button iapp&#45;button&#45;blue iapp&#45;clickable"><div class="iapp&#45;button&#45;text">Top</div></div> -->\n    <div class="iapp-menu-close iapp-button iapp-clickable"><div class="iapp-button-text">Close Menu</div></div>\n    <div class="iapp-reset-button iapp-button iapp-clickable"><div class="iapp-button-text">Reset</div></div>\n</div>\n';
 
 }
 return __p

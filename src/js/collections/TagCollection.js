@@ -12,13 +12,15 @@ define(
         initialize: function() {
             
             this.on('change:isActive', this.onActiveChange); 
-            this.listenTo(Backbone, 'items:filtered', this.onItemsFiltered);
+            // this.listenTo(Backbone, 'items:filtered', this.onItemsFiltered);
             this.listenTo(Backbone, 'tags:reset', this.onTagsReset);
             this.listenTo(Backbone, 'route:filters', this.onFilterRoute);
             this.listenTo(Backbone, 'app:reset', this.onAppReset);
         },
 
-        onActiveChange: function() {
+        onActiveChange: function(activeFest) {
+            console.log('change active');
+            console.log(e);
             var filterArray = [];
             var activeModels = this.where({'isActive': true});
             _.each(activeModels, function(model) {
@@ -29,16 +31,16 @@ define(
                 router.navigate('/_');
             } else {
                 var filterSlug = filterArray.join('-');
-                router.navigate('filters/' + filterSlug);
+                router.navigate('festival/' + filterSlug);
             }
 
 
-            Backbone.trigger('filters:update', filterArray);
+            Backbone.trigger('filters:update', activeFest);
         },
 
         onItemsFiltered: function(availableTags) {
+
             this.each(function(model) {
-                console.log(availableTags);
 
                 // show all the tags that dont show up in the remaining available tags
                 if (_.contains(availableTags, model.get('tagName'))) {
@@ -57,9 +59,13 @@ define(
             
         },
         onTagsReset: function() {
-            this.each(function(tag) {
-                tag.set({'isActive': false});
-            });
+            // this.each(function(tag) {
+            //     tag.set({'isActive': false}, {silent: true});
+            // });
+            //
+            this.reset(this.models);
+
+            // this.trigger('change:isActive');
         },
         onFilterRoute: function(filterArray) {
             var _this = this; 

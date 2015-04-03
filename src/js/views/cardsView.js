@@ -57,7 +57,7 @@ define([
       var _this = this;
       $el.isotope( {
           itemSelector: '.card',
-          transitionDuration: (!config.isMobile) ? '0.2s' : 0,
+          transitionDuration: (!config.isMobile) ? '0' : 0,
           getSortData: {
             appearances: function(itemElem) {
               return parseInt(jQuery(itemElem).data('appearances'));
@@ -90,7 +90,7 @@ define([
         filterArray = _.map(filterArray, function(filter) {
           return '.' + filter;
         });
-        var filterStr = filterArray.join('');
+        var filterStr = filterArray.join(', ');
         this.$el.isotope({ filter: filterStr });
         _.delay(function() {
           $(window).trigger('scroll');
