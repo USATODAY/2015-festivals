@@ -29,15 +29,19 @@ obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
 with (obj) {
-__p += '\n      <div class="card card-detail">\n      \n        <div class="iapp-detail-image-wrap">\n        </div>\n      \n        <div class="close-card">\n            <img class="iapp-close-card-inner" src="http://www.gannett-cdn.com/experiments/usatoday/2015/02/red-carpet/img/close-icon.svg">\n            \n            </img>\n        </div>\n      \n      \n      \n        <div class="iapp-detail-info">\n            <h2 class="card-back-header">' +
-((__t = ( artist )) == null ? '' : __t) +
-' </h2>\n            <p class="iapp-summary">' +
-((__t = ( genre )) == null ? '' : __t) +
-'</p>\n            <table class="table">\n                <thead>\n                    \n                    <tr>\n                        <th>Festival</th>\n                        <th>Date</th>\n                        <th>Location</th>\n                    </tr>\n\n                </thead>\n                <tbody>\n                    \n            ';
- _.each(festivals, function(festival) { ;
+__p += '      <div class="card card-detail">\n      \n        <div class="iapp-detail-image-wrap">\n        </div>\n      \n        <div class="close-card">\n            <img class="iapp-close-card-inner" src="http://www.gannett-cdn.com/experiments/usatoday/2015/02/red-carpet/img/close-icon.svg">\n            \n            </img>\n        </div>\n      \n      \n      \n        <div class="iapp-detail-info">\n            <h2 class="card-back-header">' +
+((__t = ( artist.artist )) == null ? '' : __t) +
+' </h2>\n            <p class="iapp-summary"><span class="label label-default">' +
+((__t = ( artist.genre )) == null ? '' : __t) +
+'</span></p>\n            <table class="table">\n                <thead>\n                    \n                    <tr>\n                        <th>Festival</th>\n                        <th>Date</th>\n                        <th>Location</th>\n                    </tr>\n\n                </thead>\n                <tbody>\n                    \n            ';
+ _.each(artist.festivals, function(festival) { ;
 __p += '\n                <tr class="iapp-card-back-detail-appearance">\n                    <td class="iapp-card-back-detail-appearance-date">' +
 ((__t = (festival.full_name)) == null ? '' : __t) +
-'</td><td class="iapp-card-back-detail-appearance-network"></td><td></td><td class="iapp-card-back-detail-description"></td>\n                </tr>\n            \n            ';
+'</td><td class="iapp-card-back-detail-appearance-network">';
+ print(_.findWhere(festivals, {"tagName": festival.tag_name}).date) ;
+__p += '</td><td class="iapp-card-back-detail-description">';
+ print(_.findWhere(festivals, {"tagName": festival.tag_name}).location) ;
+__p += '</td>\n                </tr>\n            \n            ';
 });
 __p += '\n\n                </tbody>\n            </table>\n        </div>\n      \n      \n      </div>\n      \n        <div class="iapp-detail-bg"></div> \n\n';
 
@@ -47,11 +51,12 @@ return __p
 
 this["templates"]["card-front.html"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape;
+var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
+function print() { __p += __j.call(arguments, '') }
 with (obj) {
-__p += '<div class="iapp-card-info">\n    <div class="iapp-card-image-wrap">\n        <img src="http://www.gannett-cdn.com/experiments/usatoday/2015/04/festivals/img/' +
-((__t = (genre)) == null ? '' : __t) +
-'.gif" alt="" />\n    </div>\n    <h2 class="iapp-card-info-header">' +
+__p += '<div class="iapp-card-info">\n    <div class="iapp-card-image-wrap">\n        <img src="http://www.gannett-cdn.com/experiments/usatoday/2015/04/festivals/img/';
+ print(genre.toLowerCase());
+__p += '.gif" alt="" />\n    </div>\n    <h2 class="iapp-card-info-header">' +
 ((__t = ( artist)) == null ? '' : __t) +
 '</h2>\n    <p class="iapp-card-info-text"></p>\n    \n</div>\n';
 
@@ -64,21 +69,21 @@ obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
 with (obj) {
-
+__p += '<div class="iapp-fest-info-previous iapp-fest-info-arrow">\n';
  if (showPrevious) {;
-__p += '\n<div class="iapp-fest-info-previous iapp-fest-info-arrow">\n    <img src="http://www.gannett-cdn.com/experiments/usatoday/2015/04/festivals/img/arrow-left.svg" alt="previous" />\n</div>\n\n';
+__p += '\n    <img src="http://www.gannett-cdn.com/experiments/usatoday/2015/04/festivals/img/arrow-left.svg" alt="previous" />\n';
  } ;
-__p += '\n<div class="iapp-festival-detail-info">\n    <h2 class="iapp-festival-name-header">' +
+__p += '\n</div>\n\n<div class="iapp-festival-detail-info">\n    <h2 class="iapp-festival-name-header">' +
 ((__t = ( festival.name )) == null ? '' : __t) +
 '</h2>\n    <h3 class="iapp-festival-location">' +
 ((__t = ( festival.location )) == null ? '' : __t) +
 '</h3>\n    <h3 class="iapp-festival-date">' +
 ((__t = ( festival.date )) == null ? '' : __t) +
-'</h3>\n</div>\n';
+'</h3>\n</div>\n<div class="iapp-fest-info-next iapp-fest-info-arrow">\n';
  if (showNext) {;
-__p += '\n<div class="iapp-fest-info-next iapp-fest-info-arrow">\n    <img src="http://www.gannett-cdn.com/experiments/usatoday/2015/04/festivals/img/arrow-right.svg" alt="next" />\n</div>\n';
+__p += '\n    <img src="http://www.gannett-cdn.com/experiments/usatoday/2015/04/festivals/img/arrow-right.svg" alt="next" />\n';
  } ;
-__p += '\n';
+__p += '\n</div>\n';
 
 }
 return __p
