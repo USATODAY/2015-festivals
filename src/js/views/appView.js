@@ -27,8 +27,7 @@ define([
   return Backbone.View.extend({
     el: ".iapp-page-wrap",
     events: {
-      'click .iapp-begin-button': 'onBeginClick',
-      'change .iapp-last-week-radio': 'onCheckBoxChange'
+      'click .iapp-begin-button': 'onBeginClick'
     },
 
     initialize: function() {
@@ -36,19 +35,26 @@ define([
       this.listenTo(Backbone, 'route:share', this.onRouteShare);
       this.listenTo(Backbone, 'data:ready', this.onDataReady);
       this.listenTo(Backbone, 'app:reset', this.onAppReset);
-      
+      this.listenTo(Backbone, 'set:filter', this.onSetFilter);
+      this.listenTo(Backbone, 'clear:filter', this.onClearFilter);
     },
     
 
     template: templates["app-view.html"], 
 
+    festInfoTemplate: templates["fest-info.html"],
+
     render: function() {
-      this.$el.html(this.template({chatter: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", header: "Head", contact_email: ""}));
+      this.$el.html(this.template({
+          chatter: "Music fills the hot summer air at festivals across the USA. We compiled lineups from the most popular mega-music events. This page shows all the acts, starting with the most popular — click on one to see where that band or musician is playing. Then click on any of the festival names to see the lineup for that event. Rock on!", 
+          header: "USA TODAY Summer Music Festivalaganza", 
+          contact_email: ""
+      }));
       
     },
 
     addSubViews: function() {
-      this.shareModel = new ShareModel({default_share_language: "share"});
+      this.shareModel = new ShareModel();
       this.shareView = new ShareView({model: this.shareModel});
       this.menuView = new MenuView({model: new MenuModel()});
       this.itemsCollection = new ItemsCollection(dataManager.data.artists); 
@@ -64,18 +70,16 @@ define([
       this.addSubViews();
     },
 
-    onCheckBoxChange: function() {
-       var blnIsChecked = this.$('.iapp-last-week-radio').eq(1).prop("checked");
-       if (blnIsChecked) {
-        router.navigate('last-week/', {trigger: true});
-       } else {
-           Backbone.trigger('app:reset');
-           router.navigate('_');
-       }
-    },
-
     onMenuClick: function() {
       Backbone.trigger('menu:show');
+    },
+
+    onSetFilter: function(activeFestival) {
+        this.$(".iapp-festival-info-wrap").html(this.festInfoTemplate(activeFestival.toJSON()));
+    },
+
+    onClearFilter: function() {
+        this.$(".iapp-festival-info-wrap").empty();
     },
 
     onRouteShare: function() {

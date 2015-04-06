@@ -24,7 +24,7 @@
 
       filters: function(filterStr) {
         var filterArray = filterStr.split('-');
-        Backbone.trigger('route:filters', filterArray);
+        Backbone.trigger('route:filters', filterStr);
       }
 
     });

@@ -11,8 +11,6 @@ define([
       tagName: "div",
 
       initialize: function() {
-        
-          this.listenTo(this.model, 'change:filteredAppearancesTotal', this.onAppearancesChange);
       },
 
       className: function() {
@@ -46,12 +44,8 @@ define([
         this.model.set({
           "highlight": true
         });
-      },
-
-      onAppearancesChange: function() {
-        this.$el.attr('data-appearances', this.model.get('filteredAppearancesTotal'));
-        this.$('.iapp-card-front-number-inner').text(this.model.get('filteredAppearancesTotal'));
       }
+
     });
 
   });

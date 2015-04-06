@@ -14,11 +14,11 @@ __p += '<div class="iapp-project-info-wrap">\n    <h1 class="iapp-page-header">'
 ((__t = (contact_email)) == null ? '' : __t) +
 '\'>' +
 ((__t = (contact_email)) == null ? '' : __t) +
-'</a></p>\n\n    <div class="iapp-share-wrap"></div>\n    </div>\n<div class="iapp-menu"></div>\n<div id="card-wrap" class="iapp-card-wrap iapp-card-wrap-full-width"></div>\n\n<div class="iapp-intro-wrap">\n    <div class="iapp-intro-content-wrap">\n        <div class="iapp-intro-icon-wrap">\n            <!-- <div class="iapp&#45;intro&#45;icon"><img src="img/tv&#45;icon&#45;white.svg" alt=""></div> -->\n            <div class="iapp-intro-icon"><img src="http://www.gannett-cdn.com/experiments/usatoday/2015/03/sunday-shows/img/tv-icon-blue.svg" alt=""></div>\n        </div> <!-- end iapp-intro-icon-wrap -->\n        <div class="iapp-intro-info">\n            <h2 class="iapp-intro-header">' +
+'</a></p>\n\n    <div class="iapp-share-wrap"></div>\n    </div>\n    <div class="iapp-menu"></div>\n    <div class="iapp-festival-info-wrap">\n        \n    </div>\n<div id="card-wrap" class="iapp-card-wrap iapp-card-wrap-full-width"></div>\n\n<div class="iapp-intro-wrap">\n    <div class="iapp-intro-content-wrap">\n        <div class="iapp-intro-icon-wrap">\n            <span class="iapp-intro-icon"><img src="http://www.gannett-cdn.com/experiments/usatoday/2015/04/festivals/img/rock.gif" alt="rock" /></span>\n            <span class="iapp-intro-icon"><img src="http://www.gannett-cdn.com/experiments/usatoday/2015/04/festivals/img/hip-hop.gif" alt="rock" /></span>\n            <span class="iapp-intro-icon"><img src="http://www.gannett-cdn.com/experiments/usatoday/2015/04/festivals/img/indie.gif" alt="rock" /></span>\n            <span class="iapp-intro-icon"><img src="http://www.gannett-cdn.com/experiments/usatoday/2015/04/festivals/img/edm.gif" alt="rock" /></span>\n            <span class="iapp-intro-icon"><img src="http://www.gannett-cdn.com/experiments/usatoday/2015/04/festivals/img/r&b.gif" alt="rock" /></span>\n            <span class="iapp-intro-icon"><img src="http://www.gannett-cdn.com/experiments/usatoday/2015/04/festivals/img/pop.gif" alt="rock" /></span>\n            <span class="iapp-intro-icon"><img src="http://www.gannett-cdn.com/experiments/usatoday/2015/04/festivals/img/country.gif" alt="rock" /></span>\n            <span class="iapp-intro-icon"><img src="http://www.gannett-cdn.com/experiments/usatoday/2015/04/festivals/img/americana.gif" alt="rock" /></span>\n            <span class="iapp-intro-icon"><img src="http://www.gannett-cdn.com/experiments/usatoday/2015/04/festivals/img/reggae.gif" alt="rock" /></span>\n            <span class="iapp-intro-icon"><img src="http://www.gannett-cdn.com/experiments/usatoday/2015/04/festivals/img/metal.gif" alt="rock" /></span>\n            <span class="iapp-intro-icon"><img src="http://www.gannett-cdn.com/experiments/usatoday/2015/04/festivals/img/bluegrass.gif" alt="rock" /></span>\n            <span class="iapp-intro-icon"><img src="http://www.gannett-cdn.com/experiments/usatoday/2015/04/festivals/img/jazz.gif" alt="rock" /></span>\n            <span class="iapp-intro-icon"><img src="http://www.gannett-cdn.com/experiments/usatoday/2015/04/festivals/img/world.gif" alt="rock" /></span>\n            <span class="iapp-intro-icon"><img src="http://www.gannett-cdn.com/experiments/usatoday/2015/04/festivals/img/gospel.gif" alt="rock" /></span>\n            <span class="iapp-intro-icon"><img src="http://www.gannett-cdn.com/experiments/usatoday/2015/04/festivals/img/blues.gif" alt="rock" /></span>\n            <span class="iapp-intro-icon"><img src="http://www.gannett-cdn.com/experiments/usatoday/2015/04/festivals/img/latin.gif" alt="rock" /></span>\n        </div> <!-- end iapp-intro-icon-wrap -->\n        <div class="iapp-intro-info">\n            <h2 class="iapp-intro-header">' +
 ((__t = ( header )) == null ? '' : __t) +
 '</h2>\n            <p class="iapp-intro-chatter">' +
 ((__t = ( chatter )) == null ? '' : __t) +
-'</p>\n            <div class="iapp-button iapp-begin-button iapp-clickable"><div class="iapp-button-text">Begin</div></div>\n        </div> <!-- end iapp-intro-info -->\n    </div> <!-- end iapp-intro-content-wrap -->\n</div> <!-- end iapp-intro-wrap -->\n\n<div class="iapp-end-modal-wrap"></div>\n\n';
+'</p>\n            <div class="iapp-button iapp-button-blue iapp-begin-button iapp-clickable"><div class="iapp-button-text">Begin</div></div>\n        </div> <!-- end iapp-intro-info -->\n    </div> <!-- end iapp-intro-content-wrap -->\n</div> <!-- end iapp-intro-wrap -->\n\n<div class="iapp-end-modal-wrap"></div>\n\n';
 
 }
 return __p
@@ -31,7 +31,9 @@ function print() { __p += __j.call(arguments, '') }
 with (obj) {
 __p += '\n      <div class="card card-detail">\n      \n        <div class="iapp-detail-image-wrap">\n        </div>\n      \n        <div class="close-card">\n            <img class="iapp-close-card-inner" src="http://www.gannett-cdn.com/experiments/usatoday/2015/02/red-carpet/img/close-icon.svg">\n            \n            </img>\n        </div>\n      \n      \n      \n        <div class="iapp-detail-info">\n            <h2 class="card-back-header">' +
 ((__t = ( artist )) == null ? '' : __t) +
-' </h2>\n            <p class="iapp-summary"></p>\n            <table class="table">\n                <thead>\n                    \n                    <tr>\n                        <th>Festival</th>\n                    </tr>\n\n                </thead>\n                <tbody>\n                    \n            ';
+' </h2>\n            <p class="iapp-summary">' +
+((__t = ( genre )) == null ? '' : __t) +
+'</p>\n            <table class="table">\n                <thead>\n                    \n                    <tr>\n                        <th>Festival</th>\n                        <th>Date</th>\n                        <th>Location</th>\n                    </tr>\n\n                </thead>\n                <tbody>\n                    \n            ';
  _.each(festivals, function(festival) { ;
 __p += '\n                <tr class="iapp-card-back-detail-appearance">\n                    <td class="iapp-card-back-detail-appearance-date">' +
 ((__t = (festival.full_name)) == null ? '' : __t) +
@@ -52,6 +54,18 @@ __p += '<div class="iapp-card-info">\n    <div class="iapp-card-image-wrap">\n  
 '.gif" alt="" />\n    </div>\n    <h2 class="iapp-card-info-header">' +
 ((__t = ( artist)) == null ? '' : __t) +
 '</h2>\n    <p class="iapp-card-info-text"></p>\n    \n</div>\n';
+
+}
+return __p
+};
+
+this["templates"]["fest-info.html"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<h2 class="iapp-festival-name-header">' +
+((__t = ( name )) == null ? '' : __t) +
+'</h2>\n';
 
 }
 return __p
