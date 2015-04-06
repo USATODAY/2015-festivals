@@ -72,7 +72,8 @@ def create_festivals_list(sheet):
             "name": sheet.cell(rownum, 0).value.encode('utf-8'),
             "tagName": clean_festival_name(sheet.cell(rownum, 0).value.encode('utf-8')),
             "date": sheet.cell(rownum, 1).value,
-            "location": sheet.cell(rownum, 2).value
+            "location": sheet.cell(rownum, 2).value,
+            "url": sheet.cell(rownum, 3).value
         }
         festivals_list.append(festival_dict)
 

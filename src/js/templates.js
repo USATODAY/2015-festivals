@@ -91,7 +91,9 @@ __p += '\n</div>\n\n<div class="iapp-festival-detail-info">\n    <h2 class="iapp
 ((__t = ( festival.location )) == null ? '' : __t) +
 '</h3>\n    <h3 class="iapp-festival-date">' +
 ((__t = ( festival.date )) == null ? '' : __t) +
-'</h3>\n</div>\n<div class="iapp-fest-info-next iapp-fest-info-arrow">\n';
+'</h3>\n    <a href="' +
+((__t = ( festival.url )) == null ? '' : __t) +
+'" target="_blank"><h3 class="iapp-festival-info">More Info</h3></a>\n</div>\n<div class="iapp-fest-info-next iapp-fest-info-arrow">\n';
  if (showNext) {;
 __p += '\n    <img src="http://www.gannett-cdn.com/experiments/usatoday/2015/04/festivals/img/arrow-right.svg" alt="next" />\n';
  } ;
