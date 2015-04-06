@@ -54,10 +54,22 @@ obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
 with (obj) {
-__p += '<div class="iapp-card-info">\n    <div class="iapp-card-image-wrap">\n        <img src="http://www.gannett-cdn.com/experiments/usatoday/2015/04/festivals/img/';
- print(genre.toLowerCase());
-__p += '.gif" alt="" />\n    </div>\n    <h2 class="iapp-card-info-header">' +
-((__t = ( artist)) == null ? '' : __t) +
+__p += '<div class="iapp-card-info">\n    <div class="iapp-card-image-wrap">\n        ';
+ if (mobile) { ;
+__p += '\n        <img src="http://www.gannett-cdn.com/experiments/usatoday/2015/04/festivals/img/';
+ print(artist.genre.toLowerCase());
+__p += '.png" alt="' +
+((__t = (artist.genre)) == null ? '' : __t) +
+'" />\n        ';
+ } else { ;
+__p += '\n        <img src="http://www.gannett-cdn.com/experiments/usatoday/2015/04/festivals/img/';
+ print(artist.genre.toLowerCase());
+__p += '.gif" alt="' +
+((__t = (artist.genre)) == null ? '' : __t) +
+'" />\n        ';
+ } ;
+__p += '\n    </div>\n    <h2 class="iapp-card-info-header">' +
+((__t = ( artist.artist)) == null ? '' : __t) +
 '</h2>\n    <p class="iapp-card-info-text"></p>\n    \n</div>\n';
 
 }

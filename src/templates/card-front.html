@@ -1,8 +1,12 @@
 <div class="iapp-card-info">
     <div class="iapp-card-image-wrap">
-        <img src="http://www.gannett-cdn.com/experiments/usatoday/2015/04/festivals/img/<% print(genre.toLowerCase())%>.gif" alt="" />
+        <% if (mobile) { %>
+        <img src="http://www.gannett-cdn.com/experiments/usatoday/2015/04/festivals/img/<% print(artist.genre.toLowerCase())%>.png" alt="<%=artist.genre%>" />
+        <% } else { %>
+        <img src="http://www.gannett-cdn.com/experiments/usatoday/2015/04/festivals/img/<% print(artist.genre.toLowerCase())%>.gif" alt="<%=artist.genre%>" />
+        <% } %>
     </div>
-    <h2 class="iapp-card-info-header"><%= artist%></h2>
+    <h2 class="iapp-card-info-header"><%= artist.artist%></h2>
     <p class="iapp-card-info-text"></p>
     
 </div>
