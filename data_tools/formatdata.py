@@ -67,12 +67,13 @@ def create_festival_tag(festival_name):
 
 def create_festivals_list(sheet):
     festivals_list = []
-    for rownum in range(1, sheet.nrows):
+    for rownum in range(1, sheet.nrows - 2):
         festival_dict = {
             "name": sheet.cell(rownum, 0).value.encode('utf-8'),
             "tagName": clean_festival_name(sheet.cell(rownum, 0).value.encode('utf-8')),
             "date": sheet.cell(rownum, 1).value,
-            "location": sheet.cell(rownum, 2).value
+            "location": sheet.cell(rownum, 2).value,
+            "url": sheet.cell(rownum, 3).value
         }
         festivals_list.append(festival_dict)
 
@@ -88,7 +89,7 @@ def format_data():
 
     # loop through the sheets and app the results to the list
     print "looping through source festivals"
-    for sheet_num in range(1, wb.nsheets):
+    for sheet_num in range(1, wb.nsheets - 2):
         sh = wb.sheet_by_index(sheet_num)
         festival_list = create_festival_list(sh)
         festivals_list.append(festival_list)

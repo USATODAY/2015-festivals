@@ -3,9 +3,10 @@ define([
     "underscore",
     "backbone",
     "api/analytics",
+    "models/config",
     "templates"
   ],
-  function(jQuery, _, Backbone, Analytics, templates) {
+  function(jQuery, _, Backbone, Analytics, config, templates) {
 
     return Backbone.View.extend({
       tagName: "div",
@@ -34,7 +35,7 @@ define([
 
       render: function() {
         this.$el.attr('data-appearances', this.model.get('filteredAppearancesTotal'));
-        this.$el.html(this.template(this.model.toJSON()));
+        this.$el.html(this.template({artist: this.model.toJSON(), mobile: config.isMobile}));
 
         return this;
       },
