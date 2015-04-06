@@ -61,11 +61,24 @@ return __p
 
 this["templates"]["fest-info.html"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape;
+var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
+function print() { __p += __j.call(arguments, '') }
 with (obj) {
-__p += '<h2 class="iapp-festival-name-header">' +
-((__t = ( name )) == null ? '' : __t) +
-'</h2>\n';
+
+ if (showPrevious) {;
+__p += '\n<div class="iapp-fest-info-previous iapp-fest-info-arrow">\n    <img src="http://www.gannett-cdn.com/experiments/usatoday/2015/04/festivals/img/arrow-left.svg" alt="previous" />\n</div>\n\n';
+ } ;
+__p += '\n<div class="iapp-festival-detail-info">\n    <h2 class="iapp-festival-name-header">' +
+((__t = ( festival.name )) == null ? '' : __t) +
+'</h2>\n    <h3 class="iapp-festival-location">' +
+((__t = ( festival.location )) == null ? '' : __t) +
+'</h3>\n    <h3 class="iapp-festival-date">' +
+((__t = ( festival.date )) == null ? '' : __t) +
+'</h3>\n</div>\n';
+ if (showNext) {;
+__p += '\n<div class="iapp-fest-info-next iapp-fest-info-arrow">\n    <img src="http://www.gannett-cdn.com/experiments/usatoday/2015/04/festivals/img/arrow-right.svg" alt="next" />\n</div>\n';
+ } ;
+__p += '\n';
 
 }
 return __p

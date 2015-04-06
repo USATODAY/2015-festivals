@@ -28,34 +28,11 @@ define(
                 _this.data = data;
 
                 console.log(_this.data);
-                // _this.organizeTags();
                 Backbone.trigger("data:ready", this);
 
             });
         },
-        organizeTags: function() {
-            var _this = this;
-            var tags = [];
-            _this.data.filters = _.map(_this.data.filters, function(filter){
-                tagObj =  {
-                    tagName: _this.cleanTag(filter),
-                    tagPretty: filter,
-                    isNetwork: false,
-                    isCategory: false
-                };
-                //check to see if the tag is a network
-                if (_.contains(networkFilters, tagObj.tagName)) {
-                    tagObj.isNetwork = true;
-                }
-
-                //check to see if it is a category
-                if (_.contains(categoryFilters, tagObj.tagName)) {
-                    tagObj.isCategory = true;
-                }
-
-                return tagObj;
-            });
-        },
+        
         cleanTag: function(tagName) {
             return tagName.replace(/\n+/g, "-").toLowerCase();
         },

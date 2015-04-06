@@ -27,7 +27,9 @@ define([
   return Backbone.View.extend({
     el: ".iapp-page-wrap",
     events: {
-      'click .iapp-begin-button': 'onBeginClick'
+      'click .iapp-begin-button': 'onBeginClick',
+      'click .iapp-fest-info-previous': 'onPrevious',
+      'click .iapp-fest-info-next': 'onNext'
     },
 
     initialize: function() {
@@ -74,8 +76,18 @@ define([
       Backbone.trigger('menu:show');
     },
 
+    onNext: function() {
+        Backbone.trigger('festival:next');
+    },
+    
+    onPrevious: function() {
+        Backbone.trigger('festival:previous');
+    },
+
     onSetFilter: function(activeFestival) {
-        this.$(".iapp-festival-info-wrap").html(this.festInfoTemplate(activeFestival.toJSON()));
+        showPrevious = activeFestival.getIndex() > 0;
+        showNext = activeFestival.getIndex() < activeFestival.collection.length - 1;
+        this.$(".iapp-festival-info-wrap").html(this.festInfoTemplate({'festival': activeFestival.toJSON(), 'showPrevious': showPrevious, 'showNext': showNext}));
     },
 
     onClearFilter: function() {

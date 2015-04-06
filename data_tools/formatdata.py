@@ -65,8 +65,8 @@ def create_festival_tag(festival_name):
         "tag_name": clean_festival_name(festival_name)
     }
 
-def create_festivals_dict(sheet):
-    festivals_dict = {}
+def create_festivals_list(sheet):
+    festivals_list = []
     for rownum in range(1, sheet.nrows):
         festival_dict = {
             "name": sheet.cell(rownum, 0).value.encode('utf-8'),
@@ -74,9 +74,9 @@ def create_festivals_dict(sheet):
             "date": sheet.cell(rownum, 1).value,
             "location": sheet.cell(rownum, 2).value
         }
-        festivals_dict[clean_festival_name(festival_dict["name"])] = festival_dict
+        festivals_list.append(festival_dict)
 
-    return festivals_dict
+    return festivals_list
 
 
 def format_data():
@@ -97,12 +97,12 @@ def format_data():
     artist_list = sorted(create_master_list(festivals_list), key=lambda k: len(k["festivals"]))
 
     #create master festivals dict
-    festivals_dict = create_festivals_dict(wb.sheet_by_index(0))
+    festivals_master_list = create_festivals_list(wb.sheet_by_index(0))
     
     print "Saving data to JSON"
 
     with open (output_json_file, 'w') as output_file:
-        json.dump({'artists': artist_list, 'festivals': festivals_dict}, output_file)
+        json.dump({'artists': artist_list, 'festivals': festivals_master_list}, output_file)
 
     print "success"
 
