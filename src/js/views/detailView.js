@@ -5,9 +5,10 @@ define([
     "api/analytics", 
     "templates",
     "models/config",
-    "router"
+    "router",
+    "dataManager"
     ], 
-    function(jQuery, _, Backbone, Analytics, templates, config, router) {
+    function(jQuery, _, Backbone, Analytics, templates, config, router, dataManager) {
       return Backbone.View.extend({
         tagName: "div",
         className: "iapp-modal",
@@ -41,7 +42,7 @@ define([
           }
 
           
-          this.$el.html(this.template(this.model.toJSON()));   
+          this.$el.html(this.template({'artist': this.model.toJSON(), 'festivals': dataManager.data.festivals}));   
           this.postRender(this.$el);
           return this;
         },

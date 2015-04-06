@@ -15,9 +15,13 @@ define(
             this.listenTo(Backbone, 'tags:reset', this.onTagsReset);
             this.listenTo(Backbone, 'route:filters', this.onFilterRoute);
             this.listenTo(Backbone, 'app:reset', this.onAppReset);
+            this.listenTo(Backbone, 'festival:next', this.goToNext);
+            this.listenTo(Backbone, 'festival:previous', this.goToPrevious);
         },
 
         _currentFilter: null,
+
+        _currentIndex: null,
 
         onFilterSet: function(activeFilter) {
 
@@ -27,11 +31,23 @@ define(
                 this._currentFilter.set({'isActive': false});
             }
 
+            this._currentIndex = this.indexOf(activeFilter);
+
             this._currentFilter = activeFilter;
             var filterSlug = activeFilter.get('tagName');
 
             router.navigate('festival/' + filterSlug);
             Backbone.trigger('filters:update', activeFilter);
+        },
+
+        goToNext: function() {
+            nextFilter = this.at(this._currentIndex + 1);
+            nextFilter.set({'isActive': true});
+        },
+
+        goToPrevious: function() {
+            previousFilter = this.at(this._currentIndex - 1);
+            previousFilter.set({'isActive': true});
         },
 
         onClear: function() {
