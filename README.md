@@ -65,6 +65,8 @@ If you'd like to upload the new data to the live server, run
 fab upload
 ```
 
+This command requires USA TODAY's FTP credentials stored as $FTP_USER, $FTP_SERVER and $FTP_PASS
+
 Copy and hed are currently hard coded into the `AppView.js` file on lines 52 and 53 and can be updated directly there. Social language is located in the `shareModel.js` file.
 
 

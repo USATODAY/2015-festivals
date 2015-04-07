@@ -34,12 +34,15 @@ def updater(target="dev"):
     except:
         print "Couldn't copy new data to src folder"
         pass
+
+def upload():
     try:
-        pass
-        # ftp_conn = connect_ftp()
-        # ftp_conn.cwd("usatoday/2015/03/sunday-shows/data/")
-        # upload_file(ftp_conn, create_absolute_path('data_tools/output/data.json'))
-        # slack_notify("Hello! The Sunday Talk Show interactive data has been updated successfully.", slack_channel)
+        print "uploading data to the server..."
+        ftp_conn = connect_ftp()
+        ftp_conn.cwd("usatoday/2015/04/festivals/data/")
+        upload_file(ftp_conn, create_absolute_path('data_tools/output/data.json'))
+        print ("success!")
     except:
+        print "error uploading data to the server...are you sure you have $FTP_USER, $FTP_PASS, and $FTP_SERVER set as environment variables?"
         # slack_notify("I had a problem uploading the new data to the server.", slack_channel)
         pass
