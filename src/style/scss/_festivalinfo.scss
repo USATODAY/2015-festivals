@@ -1,14 +1,8 @@
 .iapp-festival-info-wrap {
     font-family: "Futura Today DemiBold", Arial, sans-serif;
-    margin: 0 auto 2em auto;
+    margin-bottom: 2em;
     max-width: 90%;
     padding: 0 2em;
-    text-align: center;
-    width: 800px;
-
-    > * {
-        display: inline-block;
-    }
 }
 
 .iapp-festival-name-header {
@@ -16,22 +10,15 @@
 }
 
 .iapp-festival-location, .iapp-festival-date, .iapp-festival-info {
+    display: inline;
     font-family: "Futura Today Normal", Arial, sans-serif;
     font-size: 1.4em;
     margin: 0.25em 0;
 }
 
 .iapp-festival-detail-info {
-    max-width: calc(100% - 110px);
-    width: 500px;
+    // max-width: calc(100% - 110px);
+    // width: 500px;
 }
 
-.iapp-fest-info-arrow {
-    cursor: pointer;
-    vertical-align: top;
-    transform: translate(0, 30%);
-    width: 50px;
-    img {
-        width: 100%;
-    }
-}
+

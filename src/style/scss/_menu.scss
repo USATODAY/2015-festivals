@@ -246,3 +246,28 @@
     left: 50%;
     bottom: -20px;
 }
+
+.iapp-fest-info-arrow {
+    bottom: 25px;
+    cursor: pointer;
+    display: none;
+    position: absolute;
+    left: 50%;
+    vertical-align: top;
+    width: 50px;
+    img {
+        width: 100%;
+    }
+}
+
+.iapp-fest-info-next {
+    transform: translate(100%, 0);
+}
+
+.iapp-fest-info-previous {
+    transform: translate(-200%, 0);
+}
+
+.show-next .iapp-fest-info-next, .show-previous .iapp-fest-info-previous {
+    display: block;
+}

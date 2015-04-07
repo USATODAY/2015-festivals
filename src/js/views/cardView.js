@@ -34,8 +34,9 @@ define([
       template: templates["card-front.html"],
 
       render: function() {
+        var blnMobile = config.isMobile || config.isTablet;
         this.$el.attr('data-appearances', this.model.get('filteredAppearancesTotal'));
-        this.$el.html(this.template({artist: this.model.toJSON(), mobile: config.isMobile}));
+        this.$el.html(this.template({artist: this.model.toJSON(), mobile: blnMobile}));
 
         return this;
       },
