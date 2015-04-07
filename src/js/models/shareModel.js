@@ -10,7 +10,7 @@ define(
     return Backbone.Model.extend( {
         defaults: {
             'default_share_language': 'I am ready to rock with USA TODAY’s Summer Music Festivalaganza interactive.',
-            'stillimage': 'http://www.gannett-cdn.com/experiments/usatoday/2015/03/sunday-shows/img/fb-post.jpg'            
+            'stillimage': 'http://www.gannett-cdn.com/experiments/usatoday/2015/04/festivals/img/fb-post.jpg'            
         },
 
         initialize: function() {
