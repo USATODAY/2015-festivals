@@ -24,11 +24,12 @@ define([
             },
             initialize: function() {
 
-                
+                this.listenTo(Backbone, "set:filter", this.onSetFilter);
                 this.listenTo(this.model, 'change:isMenuOpen', this.updateState);
                 this.render();
             },
             render: function() {
+                
                 this.updateState();
                 this.$el.html(this.template(this.model.toJSON()));
                 this.addSubViews();
@@ -39,6 +40,20 @@ define([
                 this.tagsCollection = new TagCollection(dataManager.data.festivals);
                 this.tagsView = new TagsView({collection: this.tagsCollection});
                 
+            },
+            onSetFilter: function(activeFestival) {
+                this.showPrevious = activeFestival.getIndex() > 0;
+                this.showNext = activeFestival.getIndex() < activeFestival.collection.length - 1;
+                if (this.showPrevious) {
+                    this.$(".iapp-menu-control-area").addClass("show-previous");
+                } else {
+                    this.$(".iapp-menu-control-area").removeClass("show-previous");
+                }
+                if (this.showNext) {
+                    this.$(".iapp-menu-control-area").addClass("show-next");
+                } else {
+                    this.$(".iapp-menu-control-area").removeClass("show-next");
+                }
             },
             updateState: function() {
                 if (this.model.get('isMenuOpen')) {

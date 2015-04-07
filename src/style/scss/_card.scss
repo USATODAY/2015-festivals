@@ -87,7 +87,9 @@
     display: block;
   }
 
-
+  @media (max-width: 500px) {
+    width: calc(33% - 10px);
+  }
 
 
   p {

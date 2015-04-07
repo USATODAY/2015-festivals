@@ -1,17 +1,8 @@
-<div class="iapp-fest-info-previous iapp-fest-info-arrow">
-<% if (showPrevious) {%>
-    <img src="http://www.gannett-cdn.com/experiments/usatoday/2015/04/festivals/img/arrow-left.svg" alt="previous" />
-<% } %>
-</div>
 
 <div class="iapp-festival-detail-info">
     <h2 class="iapp-festival-name-header"><%= festival.name %></h2>
-    <h3 class="iapp-festival-location"><%= festival.location %></h3>
-    <h3 class="iapp-festival-date"><%= festival.date %></h3>
+    <h3 class="iapp-festival-location"><%= festival.location %>, </h3>
+    <h3 class="iapp-festival-date"><%= festival.date %>, </h3>
     <a href="<%= festival.url %>" target="_blank"><h3 class="iapp-festival-info">More Info</h3></a>
 </div>
-<div class="iapp-fest-info-next iapp-fest-info-arrow">
-<% if (showNext) {%>
-    <img src="http://www.gannett-cdn.com/experiments/usatoday/2015/04/festivals/img/arrow-right.svg" alt="next" />
-<% } %>
-</div>
+
