@@ -19,7 +19,6 @@ define([
             events: {
                 'click .iapp-menu-close': 'onCloseClick',
                 "click .iapp-menu-button": "onMenuClick",
-                'click .iapp-top-button': 'onTopClick',
                 'click .iapp-reset-button': 'onResetClick'
             },
             initialize: function() {
@@ -33,7 +32,6 @@ define([
                 this.updateState();
                 this.$el.html(this.template(this.model.toJSON()));
                 this.addSubViews();
-                this._defaultPanelOffset = this.$('.iapp-menu-panel').offset().top;
                 return this;
             },
             addSubViews: function() {
@@ -82,48 +80,7 @@ define([
                 var numDislikes = this.model.get('numdislikes');
                 this.$('.iapp-menu-scoreboard-dislikes').find('.iapp-menu-scoreboard-score-number').text(numDislikes);
             },
-            onWindowScroll: _.throttle(function() {
-               if (this.checkIsVisible()) {
-                    this.$el.addClass('iapp-menu-scrolled');
-               } else {
-                    this.$el.removeClass('iapp-menu-scrolled');
-               }
-               if(this.checkIsAtTop()) {
-                    this.$('.iapp-menu-panel').addClass('iapp-sticky');
-               } else {
-                    this.$('.iapp-menu-panel').removeClass('iapp-sticky');
-               }
-            }, 500),
-            onTopClick: function() {
-                $('body,html').animate({scrollTop: 0}, 500);
-            },
-
-            checkIsAtTop: function() {
-                var $panel = this.$('.iapp-menu-panel');
-                var $window = $(window);
-                var $cardWrap = $('.iapp-card-wrap');
-                if (this._defaultPanelOffset <= $window.scrollTop()) {
-                    return true;
-                } else {
-                    return false;
-                }
-            },
-
-            checkIsVisible: function() {
-
-                var $elem = this.$('.iapp-menu-panel');
-                var $window = $(window);
-
-                var docViewTop = $window.scrollTop();
-                var docViewBottom = docViewTop + $window.height();
-
-                var elemTop = $elem.offset().top;
-                var elemBottom = elemTop + $elem.height();
-
-
-                return docViewTop > elemBottom;
-
-            },
+            
             onResetClick: function() {
                 Backbone.trigger('app:reset');
                 router.navigate('_');

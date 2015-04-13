@@ -9,12 +9,19 @@
       routes: {
         "": "home",
         "_": "home",
+        "native": "native",
         'festival/:filterStr': 'filters'
         
       },
 
       home: function() {
         Backbone.trigger('app:reset');
+      },
+
+      native: function() {
+        $('header').hide();
+        $('body').addClass('in-app')
+
       },
 
 
