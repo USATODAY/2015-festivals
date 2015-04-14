@@ -66,7 +66,7 @@ define([
       this.$el.append(this.lastWeekView.el);
       Backbone.history.start();
     },
-
+    
     onDataReady: function() {
       this.render();
       this.addSubViews();
@@ -86,6 +86,9 @@ define([
 
     onSetFilter: function(activeFestival) {
         showPrevious = activeFestival.getIndex() > 0;
+        if (showPrevious) {
+            console.log("show previous");
+        }
         showNext = activeFestival.getIndex() < activeFestival.collection.length - 1;
         this.$(".iapp-festival-info-wrap").html(this.festInfoTemplate({'festival': activeFestival.toJSON(), 'showPrevious': showPrevious, 'showNext': showNext}));
     },
