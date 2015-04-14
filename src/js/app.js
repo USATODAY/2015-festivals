@@ -8,7 +8,7 @@ define([
   'views/appView',
   'dataManager',
   'jquery_ui_touch_punch'
-  ], 
+  ],
   function(require, jQuery, Isotope, _, Backbone, config, appView, dataManager) {
 
 
@@ -27,7 +27,7 @@ define([
             if (config.isTablet || config.isMobile) {
                 $('.iapp-page-wrap').addClass('iapp-touch-device');
             }
-            
+
             //turn resize and scroll into Backbone events
             $(window).on('resize', function(e) {
                 Backbone.trigger('window:resize');
@@ -37,16 +37,21 @@ define([
                 Backbone.trigger('window:scroll');
             });
 
+            
 
-            //Make data request
-          
-            dataManager.getData();
+            if (!Backbone.History.started) {
 
-            //Create app view
-            appview = new appView();
-          
+                //Make data request
+
+                dataManager.getData();
+
+                //Create app view
+                appview = new appView();
+
+            }
+
         }
-      );   
+      );
     }
   };
 });

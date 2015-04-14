@@ -38,3 +38,16 @@ article {
 .iapp-clickable {
   cursor: pointer;
 }
+
+
+/*******
+
+remove top margin when we remove header
+
+******/
+
+.in-app article.padded-container, .in-app article.padded-container.first-margin, .in-app.has-notifications article.padded-container {
+    //have to override inline style
+    margin-top: 0 !important;
+}
+

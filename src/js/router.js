@@ -9,6 +9,7 @@
       routes: {
         "": "home",
         "_": "home",
+        "native": "native",
         'festival/:filterStr': 'filters'
         
       },
@@ -17,9 +18,10 @@
         Backbone.trigger('app:reset');
       },
 
+      native: function() {
+        $('header').hide();
+        $('body').addClass('in-app')
 
-      lastWeek: function() {
-        Backbone.trigger('route:last-week');
       },
 
       filters: function(filterStr) {
