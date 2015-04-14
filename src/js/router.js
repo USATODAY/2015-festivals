@@ -24,11 +24,6 @@
 
       },
 
-
-      lastWeek: function() {
-        Backbone.trigger('route:last-week');
-      },
-
       filters: function(filterStr) {
         var filterArray = filterStr.split('-');
         Backbone.trigger('route:filters', filterStr);
