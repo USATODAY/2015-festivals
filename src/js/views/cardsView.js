@@ -30,6 +30,7 @@ define([
       this.listenTo(Backbone, "clear:filter", this.clearFilters);
       this.listenTo(Backbone, 'route:share', this.onRouteShare);
       this.listenTo(Backbone, 'app:reset', this.onAppReset);
+      this.listenTo(Backbone, 'search', this.searchByName);
       this.render();
 
     },
@@ -96,6 +97,17 @@ define([
         _.delay(function() {
           $(window).trigger('scroll');
         }, 2000);
+    },
+
+    searchByName: function(name) {
+        console.log(name);
+        this.$el.isotope({
+            filter: function() {
+                var itemName = $(this).data("search-name").toString();
+                console.log(itemName);
+                return itemName.indexOf(name) > -1;
+            }
+        });
     },
 
     relayout: _.throttle(function() {

@@ -25,12 +25,33 @@ define(
         getData: function() {
             var _this = this;
             jQuery.getJSON(dataURL, function(data) {        
-                _this.data = data;
+                _this.data = _this.cleanSearchNames(data);
 
                 console.log(_this.data);
                 Backbone.trigger("data:ready", this);
 
             });
+        },
+
+        cleanSearchNames: function(data) {
+            var _this = this;
+            var returnArtists = _.map(data.artists, function(artist) {
+                normalizedName = _this._normalizeName(artist.artist);
+                return _.extend(artist, {
+                    searchName: normalizedName
+                });
+            });
+
+            data.artists = returnArtists;
+
+            return data;
+        },
+
+        _normalizeName: function(name) {
+            var noSpaces = name.toLowerCase().trim().replace(/\s+/g, "_");
+            var noAmpersands = noSpaces.replace(/&+/g, "and");
+            var noPunctuation = noAmpersands.replace(/[\.,-\/#!$%\^&\*;:{}=\-`~()]/g,"");
+            return noPunctuation.toString();
         },
         
         cleanTag: function(tagName) {

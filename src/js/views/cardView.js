@@ -14,6 +14,13 @@ define([
       initialize: function() {
       },
 
+      attributes: function() {
+      
+          return {
+            "data-search-name": this.model.get("searchName")
+          }
+      },
+
       className: function() {
         var tags = this.model.get("festivals");
         var classes = "card small-card";

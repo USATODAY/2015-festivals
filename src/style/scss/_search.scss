@@ -1,0 +1,44 @@
+.iapp-search-button {
+    
+    // margin: 0 auto;
+    // padding: 0.5em;
+    // text-align: center;
+    // width: 8em;
+    button {
+        background: $blue;
+        color: white;
+        font-family: "Futura Today Light", Arial, sans-serif;
+        &:hover {
+            background: $blue;
+            color: white;
+        }
+    }
+}
+
+.search-wrap-container {
+    margin: 0 auto;
+    width: 400px;
+}
+
+.iapp-search-input {
+   //  background: none;
+   //  // border: none;
+   //  border-image: none;
+   //  border-style: none;
+   //  border: solid 2px $medium-grey;
+   //  // border-radius: 5px;
+   //  box-shadow: none;
+   //  color: $dark-grey;
+   //  display: block;
+   //  font-family: "Futura Today Demibold", Arial,sans-serif;
+   //  font-size: 1.2em;
+   //  margin: 0 auto 1em auto;
+   //  padding: .5em;
+   //  text-align: center;
+   //  transition: all 250ms ease;
+   //  -webkit-appearance: none; 
+   //  &:focus {
+   //      border: solid 2px $blue;
+   //      outline: none;
+   // }
+}
