@@ -144,7 +144,7 @@ this["templates"]["search.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class="search-wrap-container">\n    <div class="search-wrap input-group">\n        <input type="text" name="search-box" class="iapp-search-input form-control" id="iapp-search-input" value="" placeholder="search for a band" />\n        <span class="iapp-search-button input-group-btn iapp-clickable"><button type="button" class="btn btn-default">search</button></span>\n    </div>\n</div>\n';
+__p += '<div class="search-wrap-container">\n    <div class="search-wrap input-group input-group-lg">\n        <input type="text" name="search-box" class="iapp-search-input form-control" id="iapp-search-input" value="" placeholder="search for a band" />\n        <span class="iapp-search-button input-group-btn iapp-clickable"><button type="button" class="btn btn-default">search</button></span>\n    </div>\n</div>\n';
 
 }
 return __p
