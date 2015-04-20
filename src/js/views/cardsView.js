@@ -90,8 +90,8 @@ define([
 
     filter: function(activeFilter) {
         filterStr = "." + activeFilter.get('tagName');
-        console.log(filterStr);
         this.$el.isotope({ filter: filterStr });
+        this.$noResultsMessage.hide();
         _.delay(function() {
           $(window).trigger('scroll');
         }, 1000);
