@@ -23,6 +23,7 @@ define([
     },
 
     initialize: function() {
+      this.$noResultsMessage = $('.no-results-message');
       this.listenTo(this.collection, 'change:highlight', this.showDetail);
       this.listenTo(router, "highlight", this.onHighlightRoute);
       this.listenTo(router, "homeRoute", this.onHomeRoute);
@@ -48,8 +49,9 @@ define([
       
     },
 
+
     render: function() {
-      this.$el.empty();
+      // this.$el.empty();
       this.collection.each(this.addOne, this);
       // this.$el.addClass('iapp-card-wrap-full-width');
       
@@ -100,14 +102,22 @@ define([
     },
 
     searchByName: function(name) {
-        console.log(name);
         this.$el.isotope({
             filter: function() {
                 var itemName = $(this).data("search-name").toString();
-                console.log(itemName);
                 return itemName.indexOf(name) > -1;
             }
         });
+
+        numResults = this.$el.data('isotope').filteredItems.length;
+        console.log(numResults);
+        if (numResults == 0) {
+            // this.$el.append(this.noResultsMessage());
+            this.$noResultsMessage.show();
+            this.$el.css('height', 'auto');
+        } else {
+            this.$noResultsMessage.hide();
+        }
     },
 
     relayout: _.throttle(function() {
@@ -119,6 +129,7 @@ define([
 
     clearFilters: function(e) {
       this.$el.isotope({ filter: "*"});
+      this.$noResultsMessage.hide();
     },
 
     onRouteShare: function() {

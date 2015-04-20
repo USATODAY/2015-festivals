@@ -43,3 +43,16 @@
    //      outline: none;
    // }
 }
+
+.no-results-message.alert-danger {
+    background-color: lighten($red, 30);
+    border: darken($red, 20);
+    // border-radius: 5px;
+    color: darken($red, 20);
+    display: none;
+    margin: 0 auto;
+    max-width: 90%;
+    // padding: 2em;
+    text-align: center;
+    width: 400px;
+}
