@@ -23,7 +23,7 @@ define([
     },
 
     initialize: function() {
-      this.$noResultsMessage = $('.no-results-message');
+      this.$noResultsMessage = $('.no-results-wrap');
       this.listenTo(this.collection, 'change:highlight', this.showDetail);
       this.listenTo(router, "highlight", this.onHighlightRoute);
       this.listenTo(router, "homeRoute", this.onHomeRoute);

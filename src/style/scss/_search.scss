@@ -49,10 +49,21 @@
     border: darken($red, 20);
     // border-radius: 5px;
     color: darken($red, 20);
-    display: none;
     margin: 0 auto;
     max-width: 90%;
     // padding: 2em;
     text-align: center;
     width: 400px;
+}
+
+.no-results-wrap {
+    display: none;
+}
+
+.no-results-image {
+    margin: 1em auto;
+    width: 70px;
+    img {
+        width: 100%;
+    }
 }
