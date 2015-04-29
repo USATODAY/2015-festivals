@@ -29,7 +29,9 @@ define([
     events: {
       'click .iapp-begin-button': 'onBeginClick',
       'click .iapp-fest-info-previous': 'onPrevious',
-      'click .iapp-fest-info-next': 'onNext'
+      'click .iapp-fest-info-next': 'onNext',
+      'click .iapp-search-button': 'searchText',
+      'keypress #iapp-search-input': 'onSearchKeypress'
     },
 
     initialize: function() {
@@ -45,6 +47,7 @@ define([
     template: templates["app-view.html"], 
 
     festInfoTemplate: templates["fest-info.html"],
+    searchTemplate: templates["search.html"],
 
     render: function() {
       this.$el.html(this.template({
@@ -52,6 +55,7 @@ define([
           header: "USA TODAY Summer Music Festivalaganza", 
           contact_email: ""
       }));
+      this.$('.iapp-festival-info-wrap').html(this.searchTemplate());
       
     },
 
@@ -94,7 +98,7 @@ define([
     },
 
     onClearFilter: function() {
-        this.$(".iapp-festival-info-wrap").empty();
+        this.$('.iapp-festival-info-wrap').html(this.searchTemplate());
     },
 
     onRouteShare: function() {
@@ -119,8 +123,20 @@ define([
         this.menuView.model.set({'isMenuOpen': false});
         this.$('.iapp-last-week-radio').eq(1).prop('checked', true);
         this.$('.iapp-last-week-radio').eq(0).prop('checked', false);
-    }
-    
+    },
+
+    onSearchKeypress: function(e) {
+        var _this = this;
+        if (e.charCode == 13) {
+            _this.searchText();
+        }
+    },
+
+    searchText: function() {
+        var searchText = this.$('#iapp-search-input').val();
+        Backbone.trigger("search", this._normalizeName(searchText));
+    },
+    _normalizeName: dataManager._normalizeName,
   });
 
 });
