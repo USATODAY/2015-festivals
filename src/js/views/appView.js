@@ -127,7 +127,7 @@ define([
 
     onSearchKeypress: function(e) {
         var _this = this;
-        if (e.charCode == 13) {
+        if (e.which == 13) {
             _this.searchText();
         }
     },
