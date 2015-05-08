@@ -67,7 +67,7 @@ def create_festival_tag(festival_name):
 
 def create_festivals_list(sheet):
     festivals_list = []
-    for rownum in range(1, sheet.nrows - 2):
+    for rownum in range(1, sheet.nrows - 1):
         festival_dict = {
             "name": sheet.cell(rownum, 0).value.encode('utf-8'),
             "tagName": clean_festival_name(sheet.cell(rownum, 0).value.encode('utf-8')),
