@@ -38,7 +38,8 @@ def clean_festival_name(name_string):
     no_spaces = re.sub(r"\s+", "_", name_string.strip())
     no_exclamation = re.sub(r"!+", "", no_spaces)
     no_ampersands = re.sub(r"&+", "", no_exclamation)
-    return no_ampersands.lower()
+    no_punctuation = re.sub(r"[\.,-\/#!$%\^&\*;:{}=\-\'`~()]+", "", no_ampersands)
+    return no_punctuation.lower()
 
 
 def create_festival_list(sheet):
